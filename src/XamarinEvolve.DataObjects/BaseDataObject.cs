@@ -1,10 +1,6 @@
 ﻿using System;
 
-#if BACKEND
-using Microsoft.Azure.Mobile.Server;
-#elif MOBILE
 using MvvmHelpers;
-#endif
 
 namespace XamarinEvolve.DataObjects
 {
@@ -13,17 +9,7 @@ namespace XamarinEvolve.DataObjects
     {
         string Id {get;set;}
     }
-    #if BACKEND
-    public class BaseDataObject : EntityData
-    {
-        public BaseDataObject ()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
 
-        public string RemoteId { get; set; }
-    }
-    #else
     public class BaseDataObject : ObservableObject, IBaseDataObject
     {
         public BaseDataObject()
@@ -39,6 +25,5 @@ namespace XamarinEvolve.DataObjects
         [Microsoft.WindowsAzure.MobileServices.Version]
         public string AzureVersion { get; set; }
     }
-    #endif
 }
 

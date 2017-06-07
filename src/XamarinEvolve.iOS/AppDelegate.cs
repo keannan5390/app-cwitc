@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,6 +19,7 @@ using XamarinEvolve.DataStore.Abstractions;
 using HockeyApp;
 using System.Threading.Tasks;
 using Google.AppIndexing;
+using HockeyApp.iOS;
 
 namespace XamarinEvolve.iOS
 {
@@ -55,8 +56,7 @@ namespace XamarinEvolve.iOS
             UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
             UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
 
-            #if !ENABLE_TEST_CLOUD
-            if (!string.IsNullOrWhiteSpace(ApiKeys.HockeyAppiOS) && ApiKeys.HockeyAppiOS != nameof(ApiKeys.HockeyAppiOS)))
+            if (!string.IsNullOrWhiteSpace(ApiKeys.HockeyAppiOS) && ApiKeys.HockeyAppiOS != nameof(ApiKeys.HockeyAppiOS)) 
             {
                
                 var manager = BITHockeyManager.SharedHockeyManager;
@@ -69,7 +69,6 @@ namespace XamarinEvolve.iOS
                 //manager.Authenticator.AuthenticateInstallation();
                    
             }
-            #endif
 
             Forms.Init();
             FormsMaps.Init();
@@ -78,18 +77,6 @@ namespace XamarinEvolve.iOS
             AppIndexing.SharedInstance.RegisterApp (618319027);
 
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
-            // Code for starting up the Xamarin Test Cloud Agent
-            #if ENABLE_TEST_CLOUD
-            Xamarin.Calabash.Start();
-            //Mapping StyleId to iOS Labels
-            Forms.ViewInitialized += (object sender, ViewInitializedEventArgs e) =>
-            {
-                if (null != e.View.StyleId)
-                {
-                    e.NativeView.AccessibilityIdentifier = e.View.StyleId;
-                }
-            };
-            #endif
 
             SetMinimumBackgroundFetchInterval();
 
@@ -143,10 +130,6 @@ namespace XamarinEvolve.iOS
 
         public override void RegisteredForRemoteNotifications(UIApplication app, NSData deviceToken)
         {
-
-#if ENABLE_TEST_CLOUD
-#else
-
             if (ApiKeys.AzureServiceBusUrl == nameof(ApiKeys.AzureServiceBusUrl))
                 return;
 
@@ -163,7 +146,6 @@ namespace XamarinEvolve.iOS
                 else
                     Console.WriteLine("Success");
             });
-            #endif
         }
 
         public override void ReceivedRemoteNotification(UIApplication app, NSDictionary userInfo)

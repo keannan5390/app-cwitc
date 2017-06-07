@@ -76,21 +76,6 @@ namespace XamarinEvolve.Clients.Portable
                 #endif
                 AccountResponse result = null;
 
-                #if ENABLE_TEST_CLOUD
-                if(email == "xtc@xamarin.com")
-                {
-                    result = new AccountResponse
-                        {
-                            Success = true,
-                            User = new User 
-                                {
-                                    Email = "xtc@xamarin.com",
-                                    FirstName = "XTC",
-                                    LastName = "User"
-                                }
-                        };
-                }
-                #endif
                 if(result == null)
                     result = await client.LoginAsync(email, password);
                 
@@ -204,34 +189,11 @@ namespace XamarinEvolve.Clients.Portable
         {
             if(Device.OS == TargetPlatform.iOS && Settings.FirstRun)
             {
-
-                #if ENABLE_TEST_CLOUD
-                MessagingService.Current.SendMessage<MessagingServiceQuestion>(MessageKeys.Question, new MessagingServiceQuestion
-                    {
-                        Title = "Push Notifications",
-                        Positive = "Let's do it!",
-                        Negative = "Maybe Later",
-                        Question = "We can send you updates through Evolve via push notifications. Would you like to enable them now?",
-                        OnCompleted = async (success) =>
-                            {
-                                if(success)
-                                {
-                                    var push = DependencyService.Get<IPushNotifications>();
-                                    if(push != null)
-                                        await push.RegisterForNotifications();
-                                }
-
-                                await Navigation.PopModalAsync();
-                            }
-                    });
-#else
-
                     var push = DependencyService.Get<IPushNotifications>();
                     if(push != null)
                         await push.RegisterForNotifications();
 
                     await Navigation.PopModalAsync();
-#endif
             }
             else
             {

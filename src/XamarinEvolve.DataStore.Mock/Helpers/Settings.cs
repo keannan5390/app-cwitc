@@ -2,8 +2,8 @@
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using XamarinEvolve.DataStore.Abstractions;
+using Xamarin.Forms;
 
 namespace XamarinEvolve.DataStore.Mock
 {

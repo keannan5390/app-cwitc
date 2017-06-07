@@ -11,17 +11,6 @@ namespace XamarinEvolve.Clients.UI
 
         public RootPageiOS()
         {
-
-            #if ENABLE_TEST_CLOUD
-            if (Settings.Current.Email == "xtc@xamarin.com")
-            {
-                Settings.Current.FirstRun = true;
-                Settings.Current.FirstName = string.Empty;
-                Settings.Current.LastName = string.Empty;
-                Settings.Current.Email = string.Empty;
-            }
-            #endif
-
             NavigationPage.SetHasNavigationBar(this, false);
             Children.Add(new EvolveNavigationPage(new FeedPage()));
             Children.Add(new EvolveNavigationPage(new SessionsPage()));

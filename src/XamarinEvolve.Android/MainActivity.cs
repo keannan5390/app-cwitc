@@ -94,18 +94,8 @@ namespace XamarinEvolve.Droid
             ImageCircle.Forms.Plugin.Droid.ImageCircleRenderer.Init ();
 
             ZXing.Net.Mobile.Forms.Android.Platform.Init ();
-#if ENABLE_TEST_CLOUD
-            //Mapping StyleID to element content descriptions
-            Xamarin.Forms.Forms.ViewInitialized += (object sender, Xamarin.Forms.ViewInitializedEventArgs e) => {
-                if (!string.IsNullOrWhiteSpace(e.View.StyleId)) {
-                    e.NativeView.ContentDescription = e.View.StyleId;
-                }
-            };
-#endif
 
-#if !ENABLE_TEST_CLOUD
             InitializeHockeyApp ();
-#endif
 
             LoadApplication (new App ());
 
@@ -143,10 +133,8 @@ namespace XamarinEvolve.Droid
 
             if (!Settings.Current.PushNotificationsEnabled)
                 return;
-#if ENABLE_TEST_CLOUD
-#else
+            
             RegisterWithGCM ();
-#endif
 
             DataRefreshService.ScheduleRefresh (this);
         }

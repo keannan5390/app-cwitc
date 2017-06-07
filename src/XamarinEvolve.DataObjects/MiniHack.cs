@@ -12,7 +12,6 @@ namespace XamarinEvolve.DataObjects
         public string UnlockCode { get; set; }
 
 
-        #if MOBILE
         [Newtonsoft.Json.JsonIgnore]
         public Uri BadgeUri 
         { 
@@ -37,7 +36,6 @@ namespace XamarinEvolve.DataObjects
             get { return isCompleted; }
             set { SetProperty(ref isCompleted, value); }
         }
-        #endif
     }
 }
 

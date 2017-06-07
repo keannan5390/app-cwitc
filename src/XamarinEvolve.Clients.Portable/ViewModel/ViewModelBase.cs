@@ -21,20 +21,6 @@ namespace XamarinEvolve.Clients.Portable
 
         public static void Init (bool mock = true)
         {
-
-#if ENABLE_TEST_CLOUD && !DEBUG
-                DependencyService.Register<ISessionStore, XamarinEvolve.DataStore.Mock.SessionStore>();
-                DependencyService.Register<IFavoriteStore, XamarinEvolve.DataStore.Mock.FavoriteStore>();
-                DependencyService.Register<IFeedbackStore, XamarinEvolve.DataStore.Mock.FeedbackStore>();
-                DependencyService.Register<ISpeakerStore, XamarinEvolve.DataStore.Mock.SpeakerStore>();
-                DependencyService.Register<ISponsorStore, XamarinEvolve.DataStore.Mock.SponsorStore>();
-                DependencyService.Register<ICategoryStore, XamarinEvolve.DataStore.Mock.CategoryStore>();
-                DependencyService.Register<IEventStore, XamarinEvolve.DataStore.Mock.EventStore>();
-                DependencyService.Register<INotificationStore, XamarinEvolve.DataStore.Mock.NotificationStore>();
-                DependencyService.Register<IMiniHacksStore, XamarinEvolve.DataStore.Mock.MiniHacksStore>();
-                DependencyService.Register<ISSOClient, XamarinEvolve.Clients.Portable.Auth.XamarinSSOClient>();
-                DependencyService.Register<IStoreManager, XamarinEvolve.DataStore.Mock.StoreManager>();
-#else
             if (mock) 
             {
                 DependencyService.Register<ISessionStore, XamarinEvolve.DataStore.Mock.SessionStore> ();
@@ -51,22 +37,20 @@ namespace XamarinEvolve.Clients.Portable
             } 
             else 
             {
-                DependencyService.Register<ISessionStore, XamarinEvolve.DataStore.Azure.SessionStore> ();
-                DependencyService.Register<IFavoriteStore, XamarinEvolve.DataStore.Azure.FavoriteStore> ();
-                DependencyService.Register<IFeedbackStore, XamarinEvolve.DataStore.Azure.FeedbackStore> ();
-                DependencyService.Register<ISpeakerStore, XamarinEvolve.DataStore.Azure.SpeakerStore> ();
-                DependencyService.Register<ISponsorStore, XamarinEvolve.DataStore.Azure.SponsorStore> ();
-                DependencyService.Register<ICategoryStore, XamarinEvolve.DataStore.Azure.CategoryStore> ();
-                DependencyService.Register<IEventStore, XamarinEvolve.DataStore.Azure.EventStore> ();
-                DependencyService.Register<INotificationStore, XamarinEvolve.DataStore.Azure.NotificationStore> ();
-                DependencyService.Register<IMiniHacksStore, XamarinEvolve.DataStore.Azure.MiniHacksStore> ();
-                DependencyService.Register<ISSOClient, XamarinEvolve.Clients.Portable.Auth.Azure.XamarinSSOClient> ();
-                DependencyService.Register<IStoreManager, XamarinEvolve.DataStore.Azure.StoreManager> ();
+                // todo: some other data store that is real
+
+                //DependencyService.Register<ISessionStore, XamarinEvolve.DataStore.Azure.SessionStore> ();
+                //DependencyService.Register<IFavoriteStore, XamarinEvolve.DataStore.Azure.FavoriteStore> ();
+                //DependencyService.Register<IFeedbackStore, XamarinEvolve.DataStore.Azure.FeedbackStore> ();
+                //DependencyService.Register<ISpeakerStore, XamarinEvolve.DataStore.Azure.SpeakerStore> ();
+                //DependencyService.Register<ISponsorStore, XamarinEvolve.DataStore.Azure.SponsorStore> ();
+                //DependencyService.Register<ICategoryStore, XamarinEvolve.DataStore.Azure.CategoryStore> ();
+                //DependencyService.Register<IEventStore, XamarinEvolve.DataStore.Azure.EventStore> ();
+                //DependencyService.Register<INotificationStore, XamarinEvolve.DataStore.Azure.NotificationStore> ();
+                //DependencyService.Register<IMiniHacksStore, XamarinEvolve.DataStore.Azure.MiniHacksStore> ();
+                //DependencyService.Register<ISSOClient, XamarinEvolve.Clients.Portable.Auth.Azure.XamarinSSOClient> ();
+                //DependencyService.Register<IStoreManager, XamarinEvolve.DataStore.Azure.StoreManager> ();
             }
-
-
-            #endif
-
 
             DependencyService.Register<FavoriteService>();
         }

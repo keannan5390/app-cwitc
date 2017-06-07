@@ -200,33 +200,31 @@ namespace XamarinEvolve.Clients.Portable
                
                 using(var client = new HttpClient())
                 {
-                    #if ENABLE_TEST_CLOUD
-                                        var json = ResourceLoader.GetEmbeddedResourceString(Assembly.Load(new AssemblyName("XamarinEvolve.Clients.Portable")), "sampletweets.txt");
-                                        Tweets.ReplaceRange(JsonConvert.DeserializeObject<List<Tweet>>(json));
-                    #else
-
-
-                    var manager = DependencyService.Get<IStoreManager>() as XamarinEvolve.DataStore.Azure.StoreManager;
+                    // todo: hook this up to a store manager
+                    IStoreManager manager = null;
+                    //var manager = DependencyService.Get<IStoreManager>() as XamarinEvolve.DataStore.Azure.StoreManager;
                     if (manager == null)
                         return;
 
                     await manager.InitializeAsync ();
 
-                    var mobileClient = XamarinEvolve.DataStore.Azure.StoreManager.MobileService;
-                    if (mobileClient == null)
-                        return;
+
+                    // azure mobile service client was here
+                    return;
+                    ////var mobileClient = XamarinEvolve.DataStore.Azure.StoreManager.MobileService;
+                    //if (mobileClient == null)
+                    //    return;
                     
-                    var json =  await mobileClient.InvokeApiAsync<string> ("Tweet", System.Net.Http.HttpMethod.Get, null);
+                    //var json =  await mobileClient.InvokeApiAsync<string> ("Tweet", System.Net.Http.HttpMethod.Get, null);
 
-                    if (string.IsNullOrWhiteSpace(json)) 
-                    {
-                        SocialError = true;
-                        return;
-                    }
+                    //if (string.IsNullOrWhiteSpace(json)) 
+                    //{
+                    //    SocialError = true;
+                    //    return;
+                    //}
 
 
-                    Tweets.ReplaceRange(JsonConvert.DeserializeObject<List<Tweet>>(json));
-                    #endif
+                    //Tweets.ReplaceRange(JsonConvert.DeserializeObject<List<Tweet>>(json));
                 }
 
             }

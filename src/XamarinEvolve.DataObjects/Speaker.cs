@@ -75,7 +75,6 @@ namespace XamarinEvolve.DataObjects
 
         public virtual ICollection<Session> Sessions { get; set; }
 
-        #if MOBILE
         [Newtonsoft.Json.JsonIgnore]
         public string FullName { get { return $"{FirstName} {LastName}"; } }
         [Newtonsoft.Json.JsonIgnore]
@@ -122,9 +121,6 @@ namespace XamarinEvolve.DataObjects
                 return null;
             } 
         }
-        #else
-        public string Email { get; set; }
-        #endif
 
     }
 }

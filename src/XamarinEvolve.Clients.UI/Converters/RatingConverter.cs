@@ -45,7 +45,7 @@ namespace XamarinEvolve.Clients.UI
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            #if DEBUG || ENABLE_TEST_CLOUD
+            #if DEBUG
             return true;
             #endif
 

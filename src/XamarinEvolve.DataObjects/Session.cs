@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-#if MOBILE
 using System.Windows.Input;
-#endif
 
 namespace XamarinEvolve.DataObjects
 {
@@ -62,7 +60,6 @@ namespace XamarinEvolve.DataObjects
         /// <value>The end time.</value>
         public DateTime? EndTime { get; set; }
 
-#if MOBILE
         private string speakerNames;
         [Newtonsoft.Json.JsonIgnore]
         public string SpeakerNames
@@ -142,6 +139,5 @@ namespace XamarinEvolve.DataObjects
             }
         }
 
-        #endif
     }
 }

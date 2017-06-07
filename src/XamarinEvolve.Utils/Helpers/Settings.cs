@@ -3,7 +3,6 @@ using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 using XamarinEvolve.Clients.Portable;
 using System;
-using Xamarin.Forms;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
