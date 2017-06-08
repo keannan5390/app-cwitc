@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,16 +31,16 @@ namespace XamarinEvolve.iOS
 
         public static class ShortcutIdentifier
         {
-            public const string Tweet = "com.sample.evolve.tweet";
-            public const string Announcements = "com.sample.evolve.announcements";
-            public const string Events = "com.sample.evolve.events";
-            public const string MiniHacks = "com.sample.evolve.minihacks";
+            public const string Tweet = "org.cenwidev.cwitc.tweet";
+            public const string Announcements = "org.cenwidev.cwitc.announcements";
+            public const string Events = "org.cenwidev.cwitc.events";
+            public const string MiniHacks = "org.cenwidev.cwitc.minihacks";
         }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             
-            var tint = UIColor.FromRGB(118, 53, 235);
+            var tint = UIColor.FromRGB(255, 47, 75);
             UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
             UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
 

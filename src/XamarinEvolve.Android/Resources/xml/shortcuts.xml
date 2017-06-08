@@ -8,9 +8,9 @@
     android:shortcutDisabledMessage="@string/shortcut_sessions">
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetPackage="com.sample.evolve"
-      android:targetClass="com.sample.evolve.MainActivity"
-      android:data="http://evolve.xamarin.com/sessions"/>
+      android:targetPackage="org.cenwidev.cwitc"
+      android:targetClass="org.cenwidev.cwitc.MainActivity"
+      android:data="http://cwitc.org/sessions"/>
     <categories android:name="android.shortcut.conversation" />
   </shortcut>
   <shortcut
@@ -22,9 +22,9 @@
     android:shortcutDisabledMessage="@string/shortcut_events">
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetPackage="com.sample.evolve"
-      android:targetClass="com.sample.evolve.MainActivity" 
-      android:data="http://evolve.xamarin.com/events"/>
+      android:targetPackage="org.cenwidev.cwitc"
+      android:targetClass="org.cenwidev.cwitc.MainActivity" 
+      android:data="http://cwitc.org/events"/>
   </shortcut>
   <shortcut
     android:shortcutId="minihacks"
@@ -35,8 +35,8 @@
     android:shortcutDisabledMessage="@string/shortcut_minihacks">
     <intent
       android:action="android.intent.action.VIEW"
-      android:targetPackage="com.sample.evolve"
-      android:targetClass="com.sample.evolve.MainActivity" 
-      android:data="http://evolve.xamarin.com/minihacks"/>
+      android:targetPackage="org.cenwidev.cwitc"
+      android:targetClass="org.cenwidev.cwitc.MainActivity" 
+      android:data="http://cwitc.org/minihacks"/>
   </shortcut>-->
 </shortcuts>

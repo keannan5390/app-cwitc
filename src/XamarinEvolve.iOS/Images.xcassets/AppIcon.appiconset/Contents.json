@@ -55,70 +55,64 @@
       "idiom": "iphone"
     },
     {
-      "filename": "icon-ipad29.png",
+      "filename": "icon-29.png",
       "size": "29x29",
       "scale": "1x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
-      "filename": "icon-ipad29@2x.png",
+      "filename": "icon-29@2x.png",
       "size": "29x29",
       "scale": "2x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
-      "filename": "icon-ipad40.png",
+      "filename": "icon-40.png",
       "size": "40x40",
       "scale": "1x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
-      "filename": "icon-ipad40@2x.png",
+      "filename": "icon-40@2x.png",
       "size": "40x40",
       "scale": "2x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
       "filename": "icon-50.png",
       "size": "50x50",
       "scale": "1x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
       "filename": "icon-50@2x.png",
       "size": "50x50",
       "scale": "2x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
-      "filename": "ico-ipadpro83.5@2x.png",
-      "size": "83.5x83.5",
-      "scale": "2x",
-      "idiom": "ipad"
-    },
-    {
-      "filename": "icon-ipad72.png",
+      "filename": "icon-72.png",
       "size": "72x72",
       "scale": "1x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
-      "filename": "icon-ipad72@2x.png",
+      "filename": "icon-72@2x.png",
       "size": "72x72",
       "scale": "2x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
       "filename": "icon-76.png",
       "size": "76x76",
       "scale": "1x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
       "filename": "icon-76@2x.png",
       "size": "76x76",
       "scale": "2x",
-      "idiom": "ipad"
+      "idiom": ""
     },
     {
       "role": "notificationCenter",

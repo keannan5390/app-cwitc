@@ -15,7 +15,7 @@ namespace XamarinEvolve.Clients.Portable
     {
         public static AppLinkEntry GetAppLink(this Session session)
         {
-            var url = $"http://evolve.xamarin.com/session/{session.RemoteId.ToString()}";
+            var url = $"http://cwitc.org/session/{session.RemoteId.ToString()}";
             
             var entry = new AppLinkEntry
             {

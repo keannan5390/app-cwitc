@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -33,10 +33,10 @@ namespace XamarinEvolve.Droid
 {
     
 
-    [Activity(Label = "Evolve16", 
-        Name="com.sample.evolve.MainActivity",
+    [Activity(Label = "CWITC 17", 
+        Name="org.cenwidev.cwitc.MainActivity",
         Exported = true,
-        Icon = "@drawable/newicon", 
+        Icon = "@drawable/ic_launcher", 
         LaunchMode = LaunchMode.SingleTask, 
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(new []{ Intent.ActionView },
@@ -47,7 +47,7 @@ namespace XamarinEvolve.Droid
         },
         DataScheme = "http",
         DataPathPrefix = "/session/",
-        DataHost = "evolve.xamarin.com")]
+        DataHost = "cwitc.org")]
     [IntentFilter(new []{ Intent.ActionView },
         Categories = new []
         {
@@ -56,7 +56,7 @@ namespace XamarinEvolve.Droid
         },
         DataScheme = "https",
         DataPathPrefix = "/session/",
-        DataHost = "evolve.xamarin.com")]
+        DataHost = "cwitc.org")]
 
     [IntentFilter(new []{ Intent.ActionView },
         Categories = new []
@@ -65,7 +65,7 @@ namespace XamarinEvolve.Droid
             Intent.CategoryBrowsable
         },
         DataScheme = "http",
-        DataHost = "evolve.xamarin.com")]
+        DataHost = "cwitc.org")]
     [IntentFilter(new []{ Intent.ActionView },
         Categories = new []
         {
@@ -73,7 +73,7 @@ namespace XamarinEvolve.Droid
             Intent.CategoryBrowsable
         },
         DataScheme = "https",
-        DataHost = "evolve.xamarin.com")]
+        DataHost = "cwitc.org")]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate (Bundle savedInstanceState)

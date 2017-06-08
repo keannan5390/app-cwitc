@@ -412,6 +412,7 @@
   <ItemGroup />
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen~ipad.xib" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Images.xcassets\Contents.json" />

@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleIdentifier</key>
-	<string>com.sample.evolve</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -11,7 +9,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>9.0</string>
+	<string>10.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -85,8 +83,6 @@
 			<string>quickaction_mini-hacks</string>
 		</dict>
 	</array>
-	<key>CFBundleName</key>
-	<string>Evolve16</string>
 	<key>UILaunchImages</key>
 	<array>
 		<dict>
@@ -130,7 +126,11 @@
 			<string>{320, 480}</string>
 		</dict>
 	</array>
-	<key>CFBundleDisplayName</key>
-	<string>Evolve16</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.cenwidev.cwitc</string>
+	<key>CFBundleName</key>
+	<string>CWITC 17</string>
 </dict>
 </plist>

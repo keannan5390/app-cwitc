@@ -14,7 +14,7 @@ namespace XamarinEvolve.Droid
 
 
 
-    [Service(Name="com.sample.evolve.GcmService")] //Must use the service tag
+    [Service(Name="org.cenwidev.cwitc.GcmService")] //Must use the service tag
     public class GcmService : GcmServiceBase
     {
         static NotificationHub hub;
