@@ -34,7 +34,6 @@ namespace CWITC.iOS
             public const string Tweet = "org.cenwidev.cwitc.tweet";
             public const string Announcements = "org.cenwidev.cwitc.announcements";
             public const string Events = "org.cenwidev.cwitc.events";
-            public const string MiniHacks = "org.cenwidev.cwitc.minihacks";
         }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
@@ -255,11 +254,6 @@ namespace CWITC.iOS
                 case ShortcutIdentifier.Announcements:
                     Console.WriteLine("QUICKACTION: Accouncements");
                     ContinueNavigation(AppPage.Notification);
-                    handled = true;
-                    break;
-                case ShortcutIdentifier.MiniHacks:
-                    Console.WriteLine("QUICKACTION: MiniHacks");
-                    ContinueNavigation(AppPage.MiniHacks);
                     handled = true;
                     break;
                 case ShortcutIdentifier.Events:

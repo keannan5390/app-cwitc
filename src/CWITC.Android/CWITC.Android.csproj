@@ -416,7 +416,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\heart_filled.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\heart_empty.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\heart_filled.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\menu_hacks.png" />
     <AndroidResource Include="Resources\drawable-hdpi\menu_sponsors.png" />
     <AndroidResource Include="Resources\drawable-hdpi\menu_events.png" />
     <AndroidResource Include="Resources\drawable-hdpi\menu_venue.png" />
@@ -426,7 +425,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\menu_settings.png" />
     <AndroidResource Include="Resources\drawable-hdpi\toolbar_filter.png" />
     <AndroidResource Include="Resources\drawable-hdpi\toolbar_share.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\menu_hacks.png" />
     <AndroidResource Include="Resources\drawable-mdpi\menu_sponsors.png" />
     <AndroidResource Include="Resources\drawable-mdpi\menu_events.png" />
     <AndroidResource Include="Resources\drawable-mdpi\menu_venue.png" />
@@ -436,7 +434,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\menu_settings.png" />
     <AndroidResource Include="Resources\drawable-mdpi\toolbar_filter.png" />
     <AndroidResource Include="Resources\drawable-mdpi\toolbar_share.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\menu_hacks.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\menu_sponsors.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\menu_events.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\menu_venue.png" />
@@ -446,7 +443,6 @@
     <AndroidResource Include="Resources\drawable-xhdpi\menu_settings.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\toolbar_filter.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\toolbar_share.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\menu_hacks.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\menu_sponsors.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\menu_events.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\menu_venue.png" />

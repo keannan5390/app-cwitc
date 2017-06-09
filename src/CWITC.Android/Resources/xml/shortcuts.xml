@@ -25,18 +25,5 @@
       android:targetPackage="org.cenwidev.cwitc"
       android:targetClass="org.cenwidev.cwitc.MainActivity" 
       android:data="http://cwitc.org/events"/>
-  </shortcut>
-  <shortcut
-    android:shortcutId="minihacks"
-    android:enabled="true"
-    android:icon="@drawable/menu_hacks"
-    android:shortcutShortLabel="@string/shortcut_minihacks"
-    android:shortcutLongLabel="@string/shortcut_minihacks"
-    android:shortcutDisabledMessage="@string/shortcut_minihacks">
-    <intent
-      android:action="android.intent.action.VIEW"
-      android:targetPackage="org.cenwidev.cwitc"
-      android:targetClass="org.cenwidev.cwitc.MainActivity" 
-      android:data="http://cwitc.org/minihacks"/>
   </shortcut>-->
 </shortcuts>

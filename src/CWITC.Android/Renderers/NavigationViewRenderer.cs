@@ -124,9 +124,6 @@ namespace CWITC.Droid
                 case Resource.Id.nav_conference_info:
                     id = (int)AppPage.ConferenceInfo;
                     break;
-                case Resource.Id.nav_mini_hacks:
-                    id = (int)AppPage.MiniHacks;
-                    break;
                 case Resource.Id.nav_settings:
                     id = (int)AppPage.Settings;
                     break;

@@ -15,7 +15,6 @@ namespace CWITC.Clients.UI
             Children.Add(new EvolveNavigationPage(new FeedPage()));
             Children.Add(new EvolveNavigationPage(new SessionsPage()));
             Children.Add(new EvolveNavigationPage(new EventsPage()));
-            Children.Add(new EvolveNavigationPage(new MiniHacksPage()));
             Children.Add(new EvolveNavigationPage(new AboutPage()));
 
             MessagingService.Current.Subscribe<DeepLinkPage>("DeepLinkPage", async (m, p) =>
@@ -29,10 +28,6 @@ namespace CWITC.Clients.UI
                             break;
                         case AppPage.Events:
                             NavigateAsync(AppPage.Events);
-                            await CurrentPage.Navigation.PopToRootAsync();
-                            break;
-                        case AppPage.MiniHacks:
-                            NavigateAsync(AppPage.MiniHacks);
                             await CurrentPage.Navigation.PopToRootAsync();
                             break;
                         case AppPage.Session:
@@ -62,9 +57,6 @@ namespace CWITC.Clients.UI
                     App.Logger.TrackPage(AppPage.Events.ToString());
                     break;
                 case 3:
-                    App.Logger.TrackPage(AppPage.MiniHacks.ToString());
-                    break;
-                case 4:
                     App.Logger.TrackPage(AppPage.Information.ToString());
                     break;
             }
@@ -77,8 +69,7 @@ namespace CWITC.Clients.UI
                 case (int)AppPage.Feed: CurrentPage = Children[0]; break;
                 case (int)AppPage.Sessions: CurrentPage = Children[1]; break;
                 case (int)AppPage.Events: CurrentPage = Children[2]; break;
-                case (int)AppPage.MiniHacks: CurrentPage = Children[3]; break;
-                case (int)AppPage.Information: CurrentPage = Children[4]; break;
+                case (int)AppPage.Information: CurrentPage = Children[3]; break;
                 case (int)AppPage.Notification: CurrentPage = Children[0]; break;
             }
         }
@@ -86,8 +77,6 @@ namespace CWITC.Clients.UI
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-
 
             if (Settings.Current.FirstRun)
             {

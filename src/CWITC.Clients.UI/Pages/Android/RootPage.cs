@@ -50,9 +50,6 @@ namespace CWITC.Clients.UI
                     case (int)AppPage.Events://events
                         pages.Add(menuId, new EvolveNavigationPage(new EventsPage()));
                         break;
-                    case (int)AppPage.MiniHacks://Mini-Hacks
-                        newPage = new EvolveNavigationPage(new MiniHacksPage());
-                        break;
                     case (int)AppPage.Sponsors://sponsors
                         newPage = new EvolveNavigationPage(new SponsorsPage());
                         break;
@@ -128,9 +125,6 @@ namespace CWITC.Clients.UI
                     break;
                 case AppPage.Events:
                     await NavigateAsync((int)AppPage.Events);
-                    break;
-                case AppPage.MiniHacks:
-                    await NavigateAsync((int)AppPage.MiniHacks);
                     break;
             }
 
