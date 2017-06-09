@@ -31,7 +31,6 @@ namespace CWITC.Clients.Portable
                 DependencyService.Register<ICategoryStore, CWITC.DataStore.Mock.CategoryStore> ();
                 DependencyService.Register<IEventStore, CWITC.DataStore.Mock.EventStore> ();
                 DependencyService.Register<INotificationStore, CWITC.DataStore.Mock.NotificationStore> ();
-                DependencyService.Register<IMiniHacksStore, CWITC.DataStore.Mock.MiniHacksStore> ();
                 DependencyService.Register<ISSOClient, CWITC.Clients.Portable.Auth.XamarinSSOClient> ();
                 DependencyService.Register<IStoreManager, CWITC.DataStore.Mock.StoreManager> ();
             } 
@@ -47,7 +46,6 @@ namespace CWITC.Clients.Portable
                 //DependencyService.Register<ICategoryStore, CWITC.DataStore.Azure.CategoryStore> ();
                 //DependencyService.Register<IEventStore, CWITC.DataStore.Azure.EventStore> ();
                 //DependencyService.Register<INotificationStore, CWITC.DataStore.Azure.NotificationStore> ();
-                //DependencyService.Register<IMiniHacksStore, CWITC.DataStore.Azure.MiniHacksStore> ();
                 //DependencyService.Register<ISSOClient, CWITC.Clients.Portable.Auth.Azure.XamarinSSOClient> ();
                 //DependencyService.Register<IStoreManager, CWITC.DataStore.Azure.StoreManager> ();
             }

@@ -301,18 +301,12 @@
     <BundleResource Include="Resources\tab_about_selected.png" />
     <BundleResource Include="Resources\tab_about_selected%402x.png" />
     <BundleResource Include="Resources\tab_about_selected%403x.png" />
-    <BundleResource Include="Resources\tab_minihacks_selected.png" />
-    <BundleResource Include="Resources\tab_minihacks_selected%402x.png" />
-    <BundleResource Include="Resources\tab_minihacks_selected%403x.png" />
     <BundleResource Include="Resources\tab_feed_selected.png" />
     <BundleResource Include="Resources\tab_feed_selected%402x.png" />
     <BundleResource Include="Resources\tab_feed_selected%403x.png" />
     <BundleResource Include="Resources\tab_about.png" />
     <BundleResource Include="Resources\tab_about%402x.png" />
     <BundleResource Include="Resources\tab_about%403x.png" />
-    <BundleResource Include="Resources\tab_minihacks.png" />
-    <BundleResource Include="Resources\tab_minihacks%402x.png" />
-    <BundleResource Include="Resources\tab_minihacks%403x.png" />
     <BundleResource Include="Resources\tab_events.png" />
     <BundleResource Include="Resources\tab_events%402x.png" />
     <BundleResource Include="Resources\tab_events%403x.png" />
@@ -343,8 +337,6 @@
     <BundleResource Include="Resources\quickaction_announcements%403x.png" />
     <BundleResource Include="Resources\quickaction_events%402x.png" />
     <BundleResource Include="Resources\quickaction_events%403x.png" />
-    <BundleResource Include="Resources\quickaction_mini-hacks%402x.png" />
-    <BundleResource Include="Resources\quickaction_mini-hacks%403x.png" />
     <BundleResource Include="Resources\quickaction_tweet%402x.png" />
     <BundleResource Include="Resources\quickaction_tweet%403x.png" />
     <BundleResource Include="Resources\profile_generic_big.png" />

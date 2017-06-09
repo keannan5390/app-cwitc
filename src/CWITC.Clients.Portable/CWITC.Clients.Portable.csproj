@@ -64,8 +64,6 @@
     <Compile Include="Interfaces\IPushNotifications.cs" />
     <Compile Include="Services\ReminderService.cs" />
     <Compile Include="ViewModel\FeedbackViewModel.cs" />
-    <Compile Include="ViewModel\MiniHacksViewModel.cs" />
-    <Compile Include="ViewModel\MiniHackDetailsViewModel.cs" />
     <Compile Include="Interfaces\ILaunchTwitter.cs" />
     <Compile Include="ViewModel\EvaluationsViewModel.cs" />
     <Compile Include="Services\Auth0\Auth0XamarinSSOClient.cs" />

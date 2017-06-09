@@ -103,9 +103,6 @@
     <Compile Include="Pages\Info\VenuePage.xaml.cs">
       <DependentUpon>VenuePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MiniHacks\MiniHacksPage.xaml.cs">
-      <DependentUpon>MiniHacksPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Events\EventDetailsPage.xaml.cs">
       <DependentUpon>EventDetailsPage.xaml</DependentUpon>
     </Compile>
@@ -156,12 +153,6 @@
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Pages\Sessions\FeedbackPage.xaml.cs">
       <DependentUpon>FeedbackPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Cells\MiniHackCell.xaml.cs">
-      <DependentUpon>MiniHackCell.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MiniHacks\MiniHacksDetailsPage.xaml.cs">
-      <DependentUpon>MiniHacksDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AlwaysScrollView.cs" />
     <Compile Include="Controls\FavoriteImage.cs" />
@@ -372,10 +363,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>VenuePage.xaml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MiniHacks\MiniHacksPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>MiniHacksPage.xaml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Events\EventDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>EventDetailsPage.xaml</LogicalName>
@@ -435,14 +422,6 @@
     <EmbeddedResource Include="Pages\Sessions\FeedbackPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>FeedbackPage.xaml</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Cells\MiniHackCell.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>MiniHackCell.xaml</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MiniHacks\MiniHacksDetailsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>MiniHacksDetailsPage.xaml</LogicalName>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\Sessions\EvaluationsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

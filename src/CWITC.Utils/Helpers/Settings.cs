@@ -98,16 +98,6 @@ namespace CWITC.Clients.Portable
             AppSettings.Remove(GetReminderId(id));
         }
 
-        public bool IsHackFinished(string id)
-        {
-            return AppSettings.GetValueOrDefault("minihack_" + id, false);
-        }
-
-        public void FinishHack(string id)
-        {
-            AppSettings.AddOrUpdateValue("minihack_" + id, true);
-        }
-
         const string LastFavoriteTimeKey = "last_favorite_time";
 
         public DateTime LastFavoriteTime

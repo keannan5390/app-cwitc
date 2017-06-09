@@ -30,10 +30,6 @@ namespace CWITC.DataStore.Mock
         INotificationStore notificationStore;
         public INotificationStore NotificationStore => notificationStore ?? (notificationStore  = DependencyService.Get<INotificationStore>());
 
-        IMiniHacksStore miniHacksStore;
-        public IMiniHacksStore MiniHacksStore => miniHacksStore ?? (miniHacksStore  = DependencyService.Get<IMiniHacksStore>());
-
-
         ICategoryStore categoryStore;
         public ICategoryStore CategoryStore => categoryStore ?? (categoryStore  = DependencyService.Get<ICategoryStore>());
 

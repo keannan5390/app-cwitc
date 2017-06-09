@@ -122,12 +122,6 @@ namespace CWITC.Droid
                             Page = AppPage.Events
                         });
                         break;
-                    case "minihacks":
-                        MessagingService.Current.SendMessage<DeepLinkPage>("DeepLinkPage", new DeepLinkPage
-                        {
-                            Page = AppPage.MiniHacks
-                        });
-                        break;
                 }
             }
 

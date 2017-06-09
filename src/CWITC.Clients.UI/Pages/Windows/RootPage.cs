@@ -22,7 +22,6 @@ namespace CWITC.Clients.UI
                 new MenuItem { Name = "CWITC Feed", Icon = "menu_feed.png", Page = AppPage.Feed },
                 new MenuItem { Name = "Sessions", Icon = "menu_sessions.png", Page = AppPage.Sessions },
                 new MenuItem { Name = "Events", Icon = "menu_events.png", Page = AppPage.Events },
-                new MenuItem { Name = "Mini-Hacks", Icon = "menu_hacks.png", Page = AppPage.MiniHacks },
                 new MenuItem { Name = "Sponsors", Icon = "menu_sponsors.png", Page = AppPage.Sponsors },
                 new MenuItem { Name = "Evaluations", Icon = "menu_evals.png", Page = AppPage.Evals },
                 new MenuItem { Name = "Venue", Icon = "menu_venue.png", Page = AppPage.Venue },
@@ -71,9 +70,6 @@ namespace CWITC.Clients.UI
                         break;
                     case AppPage.Events://events
                         pages.Add(menuId, new EvolveNavigationPage(new EventsPage()));
-                        break;
-                    case AppPage.MiniHacks://Mini-Hacks
-                        newPage = new EvolveNavigationPage(new MiniHacksPage());
                         break;
                     case AppPage.Sponsors://sponsors
                         newPage = new EvolveNavigationPage(new SponsorsPage());
