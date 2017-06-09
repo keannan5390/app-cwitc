@@ -13,13 +13,13 @@ namespace CWITC.DataStore.Mock
         {
            var categories = new []
                 {
-                    new Category { Name = "Android", ShortName="Android", Color="#B8E986"},
-                    new Category { Name = "iOS", ShortName="iOS", Color="#F16EB0"},
-                    new Category { Name = "Xamarin.Forms", ShortName="X.Forms", Color="#7DD5C9" },
-                    new Category { Name = "Design", ShortName="Design", Color="#51C7E3"},
-                    new Category { Name = "Secure", ShortName="Secure", Color="#F88F73" },
-                    new Category { Name = "Test", ShortName="Test", Color="#4B637E"},
-                    new Category { Name = "Monitor", ShortName="Monitor", Color="#AC9AD3" },
+                    new Category { Name = "Mobile", ShortName="Mobile", Color="#B8E986"},
+                    new Category { Name = "DevOps", ShortName="DevOps", Color="#F16EB0"},
+                    new Category { Name = ".NET", ShortName=".NET", Color="#7DD5C9" },
+                    new Category { Name = "Cloud", ShortName="Cloud", Color="#51C7E3"},
+                    new Category { Name = "Cybersecurity", ShortName="Cybersecurity", Color="#F88F73" },
+                    new Category { Name = "Front-End", ShortName="Front-End", Color="#4B637E"},
+                    new Category { Name = "Database", ShortName="Database", Color="#AC9AD3" },
                 };
             return Task.FromResult(categories as IEnumerable<Category>);
         }

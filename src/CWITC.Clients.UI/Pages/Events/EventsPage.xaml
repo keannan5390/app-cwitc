@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
@@ -111,7 +111,7 @@
                     <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
                 </ActivityIndicator.Color>
             </ActivityIndicator>
-            <Label Text="Loading Events..." HorizontalOptions="Center" Style="{DynamicResource EvolveListItemTextStyle}"/>
+            <Label Text="Loading Schedule..." HorizontalOptions="Center" Style="{DynamicResource EvolveListItemTextStyle}"/>
        </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

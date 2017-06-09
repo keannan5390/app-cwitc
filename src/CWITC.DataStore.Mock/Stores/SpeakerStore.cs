@@ -181,13 +181,14 @@ namespace CWITC.DataStore.Mock
 
         readonly static string[] Companies =
             {
-                "Xamarin",
-                "Couchbase",
-                "Microsoft",
-                "Nintendo",
-                "Amazon",
-                "IBM",
-                "Google"
+                "Red Arrow Labs",
+                "BHTP",
+                "Skyward",
+                "Sentry Insurance",
+                "Delta Dental",
+                "New Resources Consulting",
+                "Wild Card",
+                "Marshfield Clinic"
             };
 
         readonly static string[] Names =

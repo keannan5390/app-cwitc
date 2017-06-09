@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
@@ -124,6 +124,33 @@
                                 <local:FooterDivider/>
                         </StackLayout>
                     </local:CardView>
+
+                                 <local:CardView IsVisible="{Binding Session.Room, Converter={StaticResource GenericIsVisibleConverter}}">
+                      <StackLayout Spacing="0">
+                            <local:LabelSection Text="Location"/> 
+                            <local:HeaderDivider/>
+                             <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
+                                <Label Text="{Binding Session.Room.Name}" Style="{DynamicResource EvolveListItemTextStyle}">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding GoToRoom}"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                             </StackLayout>
+                            <local:FooterDivider/>
+                         </StackLayout>
+                     </local:CardView>
+
+                    <!--Abstract-->
+                    <local:CardView IsVisible="{Binding Session.Abstract, Converter={StaticResource GenericIsVisibleConverter}}">
+                      <StackLayout Spacing="0">
+                            <local:LabelSection Text="Abstract"/> 
+                            <local:HeaderDivider/>
+                             <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
+                                <Label Text="{Binding Session.Abstract}" Style="{DynamicResource EvolveListItemTextStyle}" StyleId="SessionAbstract"/>
+                             </StackLayout>
+                            <local:FooterDivider/>
+                         </StackLayout>
+                     </local:CardView>
 				
                     <!--Follow-->
                     <local:CardView>
@@ -208,35 +235,6 @@
                             <local:FooterDivider/>
                          </StackLayout>
                      </local:CardView>
-
-				 <local:CardView IsVisible="{Binding Session.Room, Converter={StaticResource GenericIsVisibleConverter}}">
-                      <StackLayout Spacing="0">
-                            <local:LabelSection Text="Location"/> 
-                            <local:HeaderDivider/>
-                             <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
-                                <Label Text="{Binding Session.Room.Name}" Style="{DynamicResource EvolveListItemTextStyle}">
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding GoToRoom}"/>
-                                    </Label.GestureRecognizers>
-                                </Label>
-                             </StackLayout>
-                            <local:FooterDivider/>
-                         </StackLayout>
-                     </local:CardView>
-
-                    <!--Abstract-->
-                    <local:CardView IsVisible="{Binding Session.Abstract, Converter={StaticResource GenericIsVisibleConverter}}">
-                      <StackLayout Spacing="0">
-                            <local:LabelSection Text="Abstract"/> 
-                            <local:HeaderDivider/>
-                             <StackLayout Padding="{StaticResource StandardPadding}" BackgroundColor="White">
-                                <Label Text="{Binding Session.Abstract}" Style="{DynamicResource EvolveListItemTextStyle}" StyleId="SessionAbstract"/>
-                             </StackLayout>
-                            <local:FooterDivider/>
-                         </StackLayout>
-                     </local:CardView>
-
-                    
 
                     
                 </StackLayout>

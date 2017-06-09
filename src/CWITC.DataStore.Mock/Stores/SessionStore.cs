@@ -94,7 +94,7 @@ namespace CWITC.DataStore.Mock
             int speakerCount = 0;
             int room = 0;
             int category = 0;
-            var day = new DateTime(2016, 4, 27, 13, 0, 0, DateTimeKind.Utc);
+            var day = new DateTime(2017, 9, 30, 14, 0, 0, DateTimeKind.Utc);
             int dayCount = 0;
             for (int i = 0; i < titles.Length; i++)
             {
@@ -139,37 +139,23 @@ namespace CWITC.DataStore.Mock
 
                 SetStartEnd(sessions[i], day);
 
-                if (i == titles.Length / 2)
-                {
-                    dayCount = 0;
-                    day = new DateTime(2016, 4, 28, 13, 0, 0, DateTimeKind.Utc);
-                }
-                else
-                {
                     dayCount++;
-                    if (dayCount == 2)
+                    if (dayCount == 4)
                     {
                         day = day.AddHours(1);
+
+	                    if(day.Hour == 16)
+	                    {
+	                        day = day.AddHours(1).AddMinutes(30);
+	                    }
+
                         dayCount = 0;
                     }
-                }
-
 
                 if (speakerCount > 2)
                     speakerCount = 0;
             }
 
-
-            sessions.Add(new Session
-                {
-                    Id = sessions.Count.ToString(),
-                    Abstract = "Coming soon",
-                    MainCategory = categories[0],
-                    Room = rooms[0],
-                    //Speakers = new List<Speaker>{ speakers[0] },
-                    Title = "Something awesome!",
-                    ShortTitle = "Awesome",
-                });
             sessions[sessions.Count - 1].IsFavorite = await favoriteStore.IsFavorite(sessions[sessions.Count - 1].Id);
             sessions[sessions.Count - 1].FeedbackLeft = await feedbackStore.LeftFeedback(sessions[sessions.Count - 1]);
             sessions[sessions.Count - 1].StartTime = null;
@@ -189,58 +175,51 @@ namespace CWITC.DataStore.Mock
 
         Room [] rooms = new [] 
         {
-                new Room {Name = "Fossy Salon"},
-                new Room {Name = "Crick Salon"},
-                new Room {Name = "Franklin Salon"},
-                new Room {Name = "Goodall Salon"},
-                new Room {Name = "Linnaeus Salon"},
-                new Room {Name = "Watson Salon"},
+                new Room {Name = "Room 410"},
+                new Room {Name = "Room 415"},
+                new Room {Name = "Room 420"},
+                new Room {Name = "Room 425"}
         };
 
 
         
 
         string[] titles = new [] {
-            "Create stunning apps with the Xamarin Designer for iOS",
-            "Everyone can create beautiful apps with material design",
-            "Dispelling design myths and making apps better",
-            "3 Platforms: 1 codebase—your first Xamarin.Forms app",
-            "Mastering XAML in Xamarin.Forms",
-            "NuGet your code to all the platforms with portable class libraries",
-            "A new world of possibilities for contextual awareness with iBeacons",
-            "Wearables and IoT: Taking C# with you everywhere",
-            "Create the next great mobile app in a weekend",
-            "Best practices for effective iOS memory management",
-            "Navigation design patterns for iOS and Android",
-            "Is your app secure?",
-            "Introduction to Xamarin.Insights",
-            "Cross platform unit testing with xUnit",
-            "Test automation in practice with Xamarin Test Cloud at MixRadio",
-            "Why you should be building better mobile apps with reactive programming",
-            "Create your own sci-fi with mobile augmented reality",
-            "Addressing the OWASP mobile security threats using Xamarin"
-
+            "This is the Really Awesome Session #1",
+            "This is the Really Awesome Session #2",
+            "This is the Really Awesome Session #3",
+            "This is the Really Awesome Session #4",
+            "This is the Really Awesome Session #5",
+            "This is the Really Awesome Session #6",
+            "This is the Really Awesome Session #7",
+            "This is the Really Awesome Session #8",
+            "This is the Really Awesome Session #9",
+            "This is the Really Awesome Session #10",
+            "This is the Really Awesome Session #11",
+            "This is the Really Awesome Session #12",
+            "This is the Really Awesome Session #13",
+            "This is the Really Awesome Session #14",
+            "This is the Really Awesome Session #15",
+            "This is the Really Awesome Session #16"
         };
 
         string[] titlesShort = new [] {
-            "Stunning iOS Apps",
-            "Material Design",
-            "Making apps better",
-            "3 Platforms: 1 codebase",
-            "Mastering XAML",
-            "NuGet your code",
-            "iBeacons",
-            "Wearables and IoT",
-            "The next great app",
-            "iOS Best Practices",
-            "Navigation patterns",
-            "Is your app secure?",
-            "Xamarin.Insights",
-            "xUnit",
-            "Test Cloud at MixRadio",
-            "Reactive programming",
-            "Augmented reality",
-            "OWASP mobile security"
+            "Awesome Session #1",
+            "Awesome Session #2",
+            "Awesome Session #3",
+            "Awesome Session #4",
+            "Awesome Session #5",
+            "Awesome Session #6",
+            "Awesome Session #7",
+            "Awesome Session #8",
+            "Awesome Session #9",
+            "Awesome Session #10",
+            "Awesome Session #11",
+            "Awesome Session #12",
+            "Awesome Session #13",
+            "Awesome Session #14",
+            "Awesome Session #15",
+            "Awesome Session #16"
         };
 
         #endregion
