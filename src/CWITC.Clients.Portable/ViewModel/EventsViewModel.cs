@@ -13,7 +13,7 @@ namespace CWITC.Clients.Portable
     {
         public EventsViewModel(INavigation navigation) : base(navigation)
         {
-            Title = "Events";
+            Title = "Schedule";
         }
 
 
