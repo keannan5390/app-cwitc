@@ -318,9 +318,6 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <BundleResource Include="Resources\Default.png" />
     <BundleResource Include="Resources\Default%402x.png" />
-    <BundleResource Include="Resources\hotel_logo.png" />
-    <BundleResource Include="Resources\hotel_logo%402x.png" />
-    <BundleResource Include="Resources\hotel_logo%403x.png" />
     <BundleResource Include="Resources\profile_generic.png" />
     <BundleResource Include="Resources\profile_generic%402x.png" />
     <BundleResource Include="Resources\profile_generic%403x.png" />
@@ -351,14 +348,10 @@
     <BundleResource Include="Resources\profile_pic_shadow%403x.png" />
     <BundleResource Include="Resources\profile_pic_shadow.png" />
     <BundleResource Include="Resources\profile_pic_shadow%402x.png" />
-    <BundleResource Include="Resources\floor_1.png" />
-    <BundleResource Include="Resources\floor_1%402x.png" />
-    <BundleResource Include="Resources\floor_1%403x.png" />
-    <BundleResource Include="Resources\floor_2.png" />
-    <BundleResource Include="Resources\floor_2%402x.png" />
-    <BundleResource Include="Resources\floor_2%403x.png" />
     <BundleResource Include="Resources\logo_launchscreen%402x.png" />
     <BundleResource Include="Resources\logo_launchscreen.png" />
+    <BundleResource Include="Resources\venue_logo.jpeg" />
+    <BundleResource Include="Resources\campus_map.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

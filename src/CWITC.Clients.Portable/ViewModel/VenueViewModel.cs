@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Plugin.ExternalMaps;
 using Plugin.Messaging;
 using FormsToolkit;
+using Plugin.ExternalMaps.Abstractions;
 
 namespace CWITC.Clients.Portable
 {
@@ -13,11 +14,11 @@ namespace CWITC.Clients.Portable
     {
         public bool CanMakePhoneCall => CrossMessaging.Current.PhoneDialer.CanMakePhoneCall;
         public string EventTitle => "CWITC";
-        public string LocationTitle => "Hyatt Regency Orlando";
-        public string Address1 => "9801 International Drive";
-        public string Address2 => "Orlando, FL 32819";
-        public double Latitude => 28.427015;
-        public double Longitude => -81.467563;
+        public string LocationTitle => "Mid-State Technical College";
+        public string Address1 => "1001 Center Piont Dr";
+        public string Address2 => "Stevens Point, WI 54481";
+        public double Latitude => 44.524823;
+        public double Longitude => -89.585239;
 
         ICommand  navigateCommand;
         public ICommand NavigateCommand =>
@@ -25,8 +26,8 @@ namespace CWITC.Clients.Portable
 
         async Task ExecuteNavigateCommandAsync()
         {
-            Logger.Track(EvolveLoggerKeys.NavigateToEvolve);
-            if(!await CrossExternalMaps.Current.NavigateTo(LocationTitle, Latitude, Longitude))
+            Logger.Track(EvolveLoggerKeys.NavigateToCWITC);
+            if(!await CrossExternalMaps.Current.NavigateTo(LocationTitle, Latitude, Longitude, NavigationType.Default))
             {
                 MessagingService.Current.SendMessage(MessageKeys.Message, new MessagingServiceAlert
                     {
@@ -43,10 +44,10 @@ namespace CWITC.Clients.Portable
 
         void ExecuteCallCommand()
         {
-            Logger.Track(EvolveLoggerKeys.CallHotel);
+            Logger.Track(EvolveLoggerKeys.CallVenue);
             var phoneCallTask = CrossMessaging.Current.PhoneDialer;
             if (phoneCallTask.CanMakePhoneCall) 
-                phoneCallTask.MakePhoneCall("14072841234");
+                phoneCallTask.MakePhoneCall("17153443063");
         }
     }
 }
