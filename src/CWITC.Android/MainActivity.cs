@@ -74,6 +74,11 @@ namespace CWITC.Droid
         },
         DataScheme = "https",
         DataHost = "cwitc.org")]
+	[IntentFilter(new[] { Intent.ActionView },
+		Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+		DataScheme = "@PACKAGE_NAME@",
+		DataHost = "cwitc.auth0.com",
+		DataPathPrefix = "/android/@PACKAGE_NAME@/callback")]
     public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate (Bundle savedInstanceState)
@@ -87,6 +92,8 @@ namespace CWITC.Droid
             FormsMaps.Init(this, savedInstanceState);
             AndroidAppLinks.Init(this);
             Toolkit.Init ();
+
+            DependencyService.Register<ISSOClient, AuthSSOClient>();
             
             PullToRefreshLayoutRenderer.Init ();
             typeof (Color).GetProperty ("Accent", BindingFlags.Public | BindingFlags.Static).SetValue (null, Color.FromHex ("#757575"));
@@ -133,6 +140,15 @@ namespace CWITC.Droid
             DataRefreshService.ScheduleRefresh (this);
         }
 
+        protected override void OnNewIntent(Intent intent)
+        {
+            base.OnNewIntent(intent);
+
+            bool? isAuth0 = intent?.DataString?.Contains("auth0");
+
+            if(isAuth0.HasValue && isAuth0.Value)
+                MessagingService.Current.SendMessage(MessageKeys.LoginCallback, intent.DataString);
+        }
 
 
         void InitializeHockeyApp()

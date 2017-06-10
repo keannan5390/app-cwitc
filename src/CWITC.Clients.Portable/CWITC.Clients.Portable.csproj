@@ -35,7 +35,6 @@
     <Compile Include="Interfaces\ISSOClient.cs" />
     <Compile Include="ViewModel\SessionsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="Services\XamarinSSOClient.cs" />
     <Compile Include="Model\SSOUser.cs" />
     <Compile Include="Model\Extensions\DateTimeExtensions.cs" />
     <Compile Include="Model\Extensions\SessionExtensions.cs" />
@@ -66,7 +65,6 @@
     <Compile Include="ViewModel\FeedbackViewModel.cs" />
     <Compile Include="Interfaces\ILaunchTwitter.cs" />
     <Compile Include="ViewModel\EvaluationsViewModel.cs" />
-    <Compile Include="Services\Auth0\Auth0XamarinSSOClient.cs" />
     <Compile Include="Language.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -231,10 +229,6 @@
     <EmbeddedResource Include="sampletweets.txt">
       <LogicalName>sampletweets.txt</LogicalName>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\Auth0\" />
-    <Folder Include="Services\Azure\" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

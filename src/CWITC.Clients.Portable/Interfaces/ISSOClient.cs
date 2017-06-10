@@ -5,7 +5,7 @@ namespace CWITC.Clients.Portable
 {
     public interface ISSOClient
     {
-        Task<AccountResponse> LoginAsync(string username, string password);
+        Task<AccountResponse> LoginAsync();
 
         Task LogoutAsync();
     }

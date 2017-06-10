@@ -23,6 +23,7 @@ namespace CWITC.Clients.Portable
     }
     public static class MessageKeys
     {
+        public const string LoginCallback = "auth_login_callback";
         public const string NavigateToEvent = "navigate_event";
         public const string NavigateToSession = "navigate_session";
         public const string NavigateToSpeaker = "navigate_speaker";

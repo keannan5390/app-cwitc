@@ -38,27 +38,6 @@ namespace CWITC.Clients.UI
             }
             
             CircleImageAvatar.Source = placeholder = ImageSource.FromFile("profile_generic_big.png");
-            EntryEmail.TextChanged += (sender, e) => 
-                {
-                    var isValid = (Regex.IsMatch(e.NewTextValue, emailRegex, RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250)));
-                    if(isValid)
-                    {
-                        Device.BeginInvokeOnMainThread(()=>
-                            {
-                                CircleImageAvatar.BorderThickness = 3;
-                                CircleImageAvatar.Source = ImageSource.FromUri(new Uri(Gravatar.GetURL(EntryEmail.Text)));
-                            });
-
-                    }
-                    else if(CircleImageAvatar.Source != placeholder)
-                    {
-                        Device.BeginInvokeOnMainThread(()=>
-                            {
-                                CircleImageAvatar.BorderThickness = 0;
-                                CircleImageAvatar.Source = placeholder;
-                            });
-                    }
-                };
         }
 
         protected override bool OnBackButtonPressed()

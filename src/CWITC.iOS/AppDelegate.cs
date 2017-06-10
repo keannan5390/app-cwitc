@@ -20,6 +20,7 @@ using HockeyApp;
 using System.Threading.Tasks;
 using Google.AppIndexing;
 using HockeyApp.iOS;
+using Auth0.OidcClient;
 
 namespace CWITC.iOS
 {
@@ -35,6 +36,20 @@ namespace CWITC.iOS
             public const string Announcements = "org.cenwidev.cwitc.announcements";
             public const string Events = "org.cenwidev.cwitc.events";
         }
+
+
+        public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
+        {
+            bool? isAuth0 = url.AbsoluteString?.Contains("auth0");
+            if (isAuth0.HasValue && isAuth0.Value)
+            {
+                ActivityMediator.Instance.Send(url.AbsoluteString);
+
+                return true;
+            }
+
+            return false;
+		}
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -73,7 +88,9 @@ namespace CWITC.iOS
             FormsMaps.Init();
             Toolkit.Init();
 
-            AppIndexing.SharedInstance.RegisterApp (618319027);
+            DependencyService.Register<ISSOClient, AuthSSOClient>();
+
+			AppIndexing.SharedInstance.RegisterApp (618319027);
 
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
