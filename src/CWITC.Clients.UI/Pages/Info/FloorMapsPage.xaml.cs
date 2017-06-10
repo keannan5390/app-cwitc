@@ -18,23 +18,16 @@ namespace CWITC.Clients.UI
             {
                 new EvolveMap
                 {
-                    Local = "floor_1.png",
-                    Url = "https://s3.amazonaws.com/xamarin-releases/evolve-2016/floor_1.png",
-                    Title = "Floor Maps (1/2)"
-                },
-                new EvolveMap
-                {
-                    Local = "floor_2.png",
-                    Url = "https://s3.amazonaws.com/xamarin-releases/evolve-2016/floor_2.png",
-                    Title = "Floor Maps (2/2)"
+                    Local = "campus_map.jpg",
+                    Url = "http://www.mstc.edu/sites/default/files/styles/campus-map/public/StevensPointCampusMap_0.jpg?itok=UNMMfqBA",
+                    Title = "Campus Maps"
                 }
             };
             
 
             if (Device.OS == TargetPlatform.Android || Device.OS == TargetPlatform.iOS)
             {
-                
-                Title = "Floor Maps (1/2)";
+                Title = "Campus Map";
                 CarouselMaps.ItemSelected += (sender, args) =>
                 {
                     var current = args.SelectedItem as EvolveMap;

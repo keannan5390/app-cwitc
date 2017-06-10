@@ -39,10 +39,10 @@
     <MandroidI18n />
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
     <AndroidKeyStore>True</AndroidKeyStore>
-    <AndroidSigningKeyStore>Evolve2016.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>Build*1234</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>Build2016</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>Build*1234</AndroidSigningKeyPass>
+    <AndroidSigningKeyStore>CWITC-Debug.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>itYchI</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>CWITC-Android-Debug-Key</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>duCLiOus</AndroidSigningKeyPass>
     <Debugger>Xamarin</Debugger>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -379,14 +379,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\ic_notification.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\floor_1.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\floor_2.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\floor_1.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\floor_2.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\floor_1.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\floor_2.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\floor_1.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\floor_2.png" />
     <AndroidResource Include="Resources\values\strings.xml" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_evals.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_evals.png" />
@@ -400,6 +392,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\newicon.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\newicon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\newicon.png" />
+    <AndroidResource Include="Resources\drawable\venue_logo.jpeg" />
+    <AndroidResource Include="Resources\drawable\campus_map.jpg" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\toolbar.axml" />
@@ -465,9 +459,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\toolbar_close.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\toolbar_close.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\toolbar_close.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\hotel_logo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\hotel_logo.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\hotel_logo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\profile_generic.png" />
     <AndroidResource Include="Resources\drawable-mdpi\profile_generic.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\profile_generic.png" />

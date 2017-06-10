@@ -21,12 +21,12 @@ namespace CWITC.Clients.UI
             if (Device.OS == TargetPlatform.Android)
             {
                 ToolbarItems.Add(new ToolbarItem
-                    {
-                        Order = ToolbarItemOrder.Secondary,
-                        Text = "Get Directions",
-                        Command = vm.NavigateCommand
+                {
+                    Order = ToolbarItemOrder.Secondary,
+                    Text = Language.GetDirections,
+                    Command = vm.NavigateCommand
 
-                    });
+                });
 
                 if (vm.CanMakePhoneCall)
                 {
@@ -34,7 +34,7 @@ namespace CWITC.Clients.UI
                     ToolbarItems.Add(new ToolbarItem
                     {
                         Order = ToolbarItemOrder.Secondary,
-                        Text = "Call Hotel",
+                        Text = Language.CallVenue,
                         Command = vm.CallCommand
                     });
                 }
@@ -42,34 +42,35 @@ namespace CWITC.Clients.UI
             else if (Device.OS == TargetPlatform.iOS)
             {
                 ToolbarItems.Add(new ToolbarItem
-                    {
-                        Text = "More",
-                        Icon = "toolbar_overflow.png",
-                        Command = new Command(async () =>
+                {
+                    Text = Language.More,
+                    Icon = "toolbar_overflow.png",
+                    Command = new Command(async () =>
+                        {
+                            string[] items = null;
+                            if (!vm.CanMakePhoneCall)
                             {
-                                string[] items = null;
-                                if (!vm.CanMakePhoneCall)
-                                {
-                                    items = new[] { "Get Directions" };
-                                }
-                                else
-                                {
-                                    items = new[] { "Get Directions", "Call +1 (407) 284-1234" };
-                                }
-                                var action = await DisplayActionSheet("Hyatt Regency", "Cancel", null, items);
-                                if (action == items[0])
-                                    vm.NavigateCommand.Execute(null);
-                                else if (items.Length > 1 && action == items[1] && vm.CanMakePhoneCall)
-                                    vm.CallCommand.Execute(null);
+                                items = new[] { Language.GetDirections };
+                            }
+                            else
+                            {
+                                items = new[] { Language.GetDirections, Language.CallVenue };
+                            }
 
-                            })
-                    });
+                        var action = await DisplayActionSheet(Language.VenueName, Language.Cancel, null, items);
+                            if (action == items[0])
+                                vm.NavigateCommand.Execute(null);
+                            else if (items.Length > 1 && action == items[1] && vm.CanMakePhoneCall)
+                                vm.CallCommand.Execute(null);
+
+                        })
+                });
             }
             else
             {
                 ToolbarItems.Add(new ToolbarItem
                 {
-                    Text = "Directions",
+                    Text = Language.GetDirections,
                     Command = vm.NavigateCommand,
                     Icon = "toolbar_navigate.png"
                 });
@@ -79,7 +80,7 @@ namespace CWITC.Clients.UI
 
                     ToolbarItems.Add(new ToolbarItem
                     {
-                        Text = "Call",
+                        Text = Language.CallVenue,
                         Command = vm.CallCommand,
                         Icon = "toolbar_call.png"
                     });
@@ -91,12 +92,12 @@ namespace CWITC.Clients.UI
         {
             base.OnAppearing();
 
-            if (EvolveMap.Pins.Count > 0)
+            if (CWITC_Map.Pins.Count > 0)
                 return;
 
             var position = new Position(vm.Latitude, vm.Longitude);
-            EvolveMap.MoveToRegion(new MapSpan(position, 0.02, 0.02));
-            EvolveMap.Pins.Add(new Pin
+            CWITC_Map.MoveToRegion(new MapSpan(position, 0.02, 0.02));
+            CWITC_Map.Pins.Add(new Pin
             {
                 Type = PinType.Place,
                 Address = vm.LocationTitle,
@@ -105,7 +106,7 @@ namespace CWITC.Clients.UI
             });
         }
 
-       
+
     }
 }
 

@@ -16,7 +16,7 @@
 	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.FLASHLIGHT" />
 	<application android:icon="@drawable/Ic_launcher" android:theme="@style/MyTheme" android:label="CWITC 17">
-		<meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyBJ0Z_zoluz4nSQHA8NNIm8C_ch4UeN59c" />
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDGJm9aaiulhbUTlnXWA680ueDP-Ru4mpY" />
 	</application>
 	<receiver android:name="com.google.android.gms.gcm.GcmReceiver" android:exported="true" android:permission="com.google.android.c2dm.permission.SEND">
 		<intent-filter>

@@ -22,8 +22,8 @@ namespace CWITC.Clients.Portable
         public const string LeaveFeedback = "LeaveFeedback";
         public const string ManualSync = "ManualSync";
         public const string LaunchedBrowser = "LaunchedBrowser";
-        public const string NavigateToEvolve = "NavigateToEvolve";
-        public const string CallHotel = "CallHotel";
+        public const string NavigateToCWITC = "NavigateToCWITC";
+        public const string CallVenue = "CallVenue";
 
         public const string Logout = "Logout";
     }

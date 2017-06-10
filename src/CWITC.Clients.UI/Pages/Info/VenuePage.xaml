@@ -15,14 +15,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <maps:Map 
-                    x:Name="EvolveMap"
+                    x:Name="CWITC_Map"
                     IsShowingUser="false" 
                     MapType="Street" />
 
            
             <StackLayout Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="End"
              BackgroundColor="#99FFFFFF" Padding="{DynamicResource StandardPadding}">
-                <Image Source="hotel_logo.png" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Image Source="venue_logo.jpeg" HorizontalOptions="Center" VerticalOptions="Center"/>
 
             </StackLayout>
         </Grid>
