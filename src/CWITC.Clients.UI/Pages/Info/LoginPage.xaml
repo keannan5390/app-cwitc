@@ -54,33 +54,6 @@
                 <StackLayout.Spacing>
                     <OnPlatform x:TypeArguments="x:Double" Android="0" iOS="15" WinPhone="10"/>
                 </StackLayout.Spacing>
-                <toolkit:EntryLine
-                       Text="{Binding Email}" 
-                       Keyboard="Email"
-                       HorizontalOptions="FillAndExpand"
-                       Placeholder="email address"
-                       x:Name="EntryEmail"
-                       StyleId="EmailTextField"
-                       IsEnabled="{Binding IsNotBusy}"
-                       BorderColor="#ECECEC">
-                       <toolkit:EntryLine.HorizontalTextAlignment>
-                        <OnPlatform x:TypeArguments="TextAlignment" iOS="Center"/>
-                       </toolkit:EntryLine.HorizontalTextAlignment>
-               </toolkit:EntryLine>
-
-               <toolkit:EntryLine 
-                       Text="{Binding Password}" 
-                       HorizontalOptions="FillAndExpand"
-                       IsPassword="true"
-                       HorizontalTextAlignment="Center"
-                       Placeholder="password"
-                       StyleId="PasswordTextField"
-                       IsEnabled="{Binding IsNotBusy}"
-                       BorderColor="#ECECEC">
-                       <toolkit:EntryLine.HorizontalTextAlignment>
-                        <OnPlatform x:TypeArguments="TextAlignment" iOS="Center"/>
-                       </toolkit:EntryLine.HorizontalTextAlignment>
-               </toolkit:EntryLine>
            </StackLayout>
            <StackLayout>
            <StackLayout.Padding>

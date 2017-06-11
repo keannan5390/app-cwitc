@@ -23,19 +23,6 @@ namespace CWITC.Clients.Portable
             set { SetProperty(ref message, value); }
         }
 
-        string email;
-        public string Email
-        {
-            get { return email; }
-            set { SetProperty(ref email, value); }
-        }
-        string password;
-        public string Password
-        {
-            get { return password; }
-            set { SetProperty(ref password, value); }
-        }
-
         ICommand  loginCommand;
         public ICommand LoginCommand =>
             loginCommand ?? (loginCommand = new Command(async () => await ExecuteLoginAsync())); 
@@ -44,28 +31,6 @@ namespace CWITC.Clients.Portable
         {
             if(IsBusy)
                 return;
-
-            if(string.IsNullOrWhiteSpace(email))
-            {
-                MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert
-                    {
-                        Title="Sign in Information",
-                        Message="We do need your email address :-)",
-                        Cancel ="OK"
-                    });
-                return;
-            }
-
-            if(string.IsNullOrWhiteSpace(password))
-            {
-                MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert
-                    {
-                        Title="Sign in Information",
-                        Message="Password is empty!",
-                        Cancel ="OK"
-                    });
-                return;
-            }
 
             try 
             {
@@ -77,14 +42,14 @@ namespace CWITC.Clients.Portable
                 AccountResponse result = null;
 
                 if(result == null)
-                    result = await client.LoginAsync(email, password);
+                    result = await client.LoginAsync();
                 
                 if(result?.Success ?? false)
                 {
                     Message = "Updating schedule...";
                     Settings.FirstName = result.User?.FirstName ?? string.Empty;
                     Settings.LastName = result.User?.LastName ?? string.Empty;
-                    Settings.Email = email.ToLowerInvariant();
+                    Settings.Email = result.User?.Email?.ToLowerInvariant() ?? string.Empty;
                     MessagingService.Current.SendMessage(MessageKeys.LoggedIn);
                     Logger.Track(EvolveLoggerKeys.LoginSuccess);
                     try
@@ -137,20 +102,7 @@ namespace CWITC.Clients.Portable
         async Task ExecuteSignupAsync()
         {
             Logger.Track(EvolveLoggerKeys.Signup);
-            await CrossShare.Current.OpenBrowser("https://auth.xamarin.com/account/register", 
-                new BrowserOptions
-                {
-                    ChromeShowTitle = true,
-                    ChromeToolbarColor = new ShareColor
-                        {
-                            A=255,
-                            R=118,
-                            G=53,
-                            B=235
-                        },
-                    UseSafairReaderMode = false,
-                    UseSafariWebViewController = true
-                });
+            await ExecuteLoginAsync();
         }
 
         ICommand  cancelCommand;

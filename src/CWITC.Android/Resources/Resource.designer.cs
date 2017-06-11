@@ -26,6 +26,8 @@ namespace CWITC.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Auth0.OidcClient.Resource.String.ApplicationName = global::CWITC.Droid.Resource.String.ApplicationName;
+			global::Auth0.OidcClient.Resource.String.Hello = global::CWITC.Droid.Resource.String.Hello;
 			global::HockeyApp.Resource.Color.hockeyapp_background_header = global::CWITC.Droid.Resource.Color.hockeyapp_background_header;
 			global::HockeyApp.Resource.Color.hockeyapp_background_light = global::CWITC.Droid.Resource.Color.hockeyapp_background_light;
 			global::HockeyApp.Resource.Color.hockeyapp_background_white = global::CWITC.Droid.Resource.Color.hockeyapp_background_white;
