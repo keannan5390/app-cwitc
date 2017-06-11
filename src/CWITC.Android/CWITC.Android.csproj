@@ -397,7 +397,7 @@
     <Compile Include="Backgrounding\DataRefreshService.cs" />
     <Compile Include="Backgrounding\DataRefreshServiceBinder.cs" />
     <Compile Include="Helpers\ListViewSelectionOnTopEffect.cs" />
-    <Compile Include="AuthSSOClient.cs" />
+    <Compile Include="AndroidAuthSSOClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

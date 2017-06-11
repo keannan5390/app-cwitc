@@ -399,7 +399,7 @@
     <Compile Include="Helpers\PushNotifications.cs" />
     <Compile Include="Renderers\SelectedTabPageRenderer.cs" />
     <Compile Include="Helpers\LaunchTwitter.cs" />
-    <Compile Include="AuthSSOClient.cs" />
+    <Compile Include="iOSAuthSSOClient.cs" />
     <Compile Include="Renderers\TrackCurrentViewControllerRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

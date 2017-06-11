@@ -93,7 +93,7 @@ namespace CWITC.iOS
             FormsMaps.Init();
             Toolkit.Init();
 
-            DependencyService.Register<ISSOClient, AuthSSOClient>();
+            DependencyService.Register<ISSOClient, iOSAuthSSOClient>();
 
 			AppIndexing.SharedInstance.RegisterApp (618319027);
 

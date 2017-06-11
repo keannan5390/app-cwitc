@@ -11,7 +11,7 @@ using UIKit;
 
 namespace CWITC.iOS
 {
-    public class AuthSSOClient : ISSOClient
+    public class iOSAuthSSOClient : ISSOClient
     {
         public async Task<AccountResponse> LoginAsync()
         {
