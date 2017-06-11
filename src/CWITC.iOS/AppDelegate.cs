@@ -41,9 +41,14 @@ namespace CWITC.iOS
         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
         {
             bool? isAuth0 = url.AbsoluteString?.Contains("auth0");
+            bool? isLogout = url.AbsoluteString?.Contains("logout");
+
             if (isAuth0.HasValue && isAuth0.Value)
             {
-                ActivityMediator.Instance.Send(url.AbsoluteString);
+                if (isLogout.HasValue && isLogout.Value)
+                    MessagingService.Current.SendMessage(MessageKeys.LogoutCallback);
+                else
+                    ActivityMediator.Instance.Send(url.AbsoluteString);
 
                 return true;
             }

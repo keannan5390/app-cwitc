@@ -130,8 +130,6 @@ namespace CWITC.Clients.Portable
         {
             Logger.Track(EvolveLoggerKeys.Logout);
 
-
-
             try
             {
                 ISSOClient ssoClient = DependencyService.Get<ISSOClient>();

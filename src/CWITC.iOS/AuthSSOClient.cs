@@ -2,7 +2,11 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Auth0.OidcClient;
+using CoreGraphics;
 using CWITC.Clients.Portable;
+using FormsToolkit;
+using Foundation;
+using SafariServices;
 using UIKit;
 
 namespace CWITC.iOS
@@ -49,20 +53,31 @@ namespace CWITC.iOS
 
         public Task LogoutAsync()
         {
-            throw new NotImplementedException();
+            var redirect = "org.cenwidev.cwitc%3A%2F%2Fcwitc.auth0.com/ios/org.cenwidev.cwitc/logout";
+            string logoutUri = $"https://cwitc.auth0.com/v2/logout?returnTo={redirect}";
+            var controller = new SFSafariViewController(new NSUrl(logoutUri));
+
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            var topVC = GetViewController();
+            MessagingService.Current.Subscribe(MessageKeys.LogoutCallback, (IMessagingService arg1) =>
+            {
+                topVC.DismissViewController(true, () => { });
+
+                tcs.SetResult(true);
+
+            });
+
+            topVC.PresentViewController(controller, true, () => { });
+
+            return tcs.Task;
         }
 
         private UIViewController GetViewController()
         {
-            var window = UIApplication.SharedApplication.KeyWindow;
-            var vc = window.RootViewController;
-            while (vc.PresentedViewController != null)
-            {
-                vc = vc.PresentedViewController;
-            }
+            var vc = TrackCurrentViewControllerRenderer.CurrentViewController;
 
             return vc;
-            //
         }
     }
 }
