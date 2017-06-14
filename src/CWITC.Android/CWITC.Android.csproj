@@ -44,6 +44,8 @@
     <AndroidSigningKeyAlias>CWITC-Android-Debug-Key</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>duCLiOus</AndroidSigningKeyPass>
     <Debugger>Xamarin</Debugger>
+    <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
+    <AndroidTlsProvider>btls</AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
