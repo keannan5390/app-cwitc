@@ -7,6 +7,7 @@ using CWITC.DataStore.Abstractions;
 using FormsToolkit;
 using System.Linq;
 
+[assembly: Dependency(typeof(FavoriteService))]
 namespace CWITC.Clients.Portable
 {
     public class FavoriteService
@@ -22,6 +23,7 @@ namespace CWITC.Clients.Portable
                     await ToggleFavorite(sessionQueued);
                 });
         }
+
         public async Task<bool> ToggleFavorite(Session session)
         {
             if(!Settings.Current.IsLoggedIn)
@@ -57,4 +59,3 @@ namespace CWITC.Clients.Portable
         }
     }
 }
-

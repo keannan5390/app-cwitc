@@ -4,6 +4,8 @@ namespace CWITC.Clients.Portable
 {
     public class User
     {
+        public bool IsAnonymous { get; set; }
+        public string Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -14,7 +16,6 @@ namespace CWITC.Clients.Portable
         public bool Success { get; set; }
         public string Error { get; set; }
         public User User { get; set; }
-        public string Token { get; set; }
     }
 
     [Flags]

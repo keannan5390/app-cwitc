@@ -1,90 +1,194 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.Content;
+using Android.OS;
+using Android.Runtime;
 using Auth0.OidcClient;
 using CWITC.Clients.Portable;
+using Firebase.Auth;
 using FormsToolkit;
 using IdentityModel.OidcClient;
+using Java.Lang;
+using Java.Util;
 using Plugin.CurrentActivity;
+using Xamarin.Facebook;
+using Xamarin.Facebook.Login;
 
 namespace CWITC.Droid
 {
-	public partial class AndroidAuthSSOClient : ISSOClient
-	{
-		public async Task<AccountResponse> LoginAsync()
-		{
-			var client = new Auth0Client(new Auth0ClientOptions
-			{
-				Domain = "cwitc.auth0.com",
-				ClientId = "r2xGTXLZeEgCmqYIgLOaRJwD1sDoySzh",
-                Activity = CrossCurrentActivity.Current.Activity
-			});
-
-            AuthorizeState authorizeState = await client.PrepareLoginAsync();
-
-			var uri = Android.Net.Uri.Parse(authorizeState.StartUrl);
-			var intent = new Intent(Intent.ActionView, uri);
-			intent.AddFlags(ActivityFlags.NoHistory);
-            CrossCurrentActivity.Current.Activity.StartActivity(intent);
-
-            TaskCompletionSource<AccountResponse> tcs = new TaskCompletionSource<AccountResponse>();
-
-            MessagingService.Current.Subscribe(MessageKeys.LoginCallback, async (IMessagingService arg1, string dataString) =>
+    public partial class AndroidAuthSSOClient : Java.Lang.Object, ISSOClient
+    {
+        public async Task<AccountResponse> LoginAnonymously()
+        {
+            try
             {
-                var loginResult = await client.ProcessResponseAsync(dataString, authorizeState);
+                var authResult = await FirebaseAuth.Instance.SignInAnonymouslyAsync();
 
-                if (loginResult.IsError)
+                var user = authResult.User;
+
+                Settings.Current.AuthType = "anonymous";
+
+                return new AccountResponse
                 {
-                    Debug.WriteLine($"An error occurred during login: {loginResult.Error}");
-
-                    tcs.SetResult(new AccountResponse { Error = loginResult.Error, Success = false });
-                }
-                else
-                {
-                    string token = loginResult.IdentityToken;
-                    string accesstoken = loginResult.AccessToken;
-                    string name = loginResult.User.FindFirst(c => c.Type == "name")?.Value;
-                    string email = loginResult.User.FindFirst(c => c.Type == "email")?.Value;
-
-                    tcs.SetResult(new AccountResponse
+                    User = new Clients.Portable.User
                     {
-                        Success = true,
-                        Token = token,
-                        User = new User
-                        {
-                            FirstName = name.Split(' ')[0],
-                            LastName = name.Split(' ')[1],
-                            Email = email
-                        }
+                        IsAnonymous = true,
+                        Id = user.Uid
+                    },
+                    Success = true
+                };
+            }
+            catch (System.Exception ex)
+            {
+                return new AccountResponse
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
+        }
+
+        public async Task<AccountResponse> LoginWithFacebook()
+        {
+			var mainActivity = Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity as MainActivity;
+
+            var tokenTask = new TaskCompletionSource<AccessToken>();
+
+            var loginManager = DeviceLoginManager.Instance;
+
+			loginManager.RegisterCallback(
+				mainActivity.CallbackManager, new FacebookLoginCallback(tokenTask));
+            
+            loginManager
+                   .LogInWithReadPermissions(
+                       Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity,
+                     new List<string>
+                    {
+                        "public_profile",
+                        "email"
                     });
+            try
+            {
+                var accessToken = await tokenTask.Task;
+                loginManager.UnregisterCallback(mainActivity.CallbackManager);
+
+                TaskCompletionSource<string> getEmailTask = new TaskCompletionSource<string>();
+
+				Bundle parameters = new Bundle();
+                parameters.PutString("fields", "id,email");
+                var graphRequestResult = (await new GraphRequest(accessToken, "me", parameters, HttpMethod.Get)
+                    .ExecuteAsync()
+                    .GetAsync() as ArrayList).ToArray();
+
+                var graphResponse = graphRequestResult.FirstOrDefault() as GraphResponse;
+
+                string emailAddress = graphResponse.JSONObject.GetString("email");
+
+                var credential = FacebookAuthProvider.GetCredential(accessToken.Token);
+
+                var firebaseResult = await LoginToFirebase(credential);
+                if (firebaseResult.Success)
+                {
+                    Settings.Current.AuthType = "facebook";
+                    firebaseResult.User.Email = emailAddress;
                 }
-            });
 
-            return await tcs.Task;
-		}
+                return firebaseResult;
+            }
+            catch (System.Exception ex)
+            {
+                return new AccountResponse
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
+        }
 
-		public Task LogoutAsync()
-		{
-			var redirect = "org.cenwidev.cwitc%3A%2F%2Fcwitc.auth0.com/android/org.cenwidev.cwitc/logout";
-			string logoutUri = $"https://cwitc.auth0.com/v2/logout?returnTo={redirect}";
+        public Task LogoutAsync()
+        {
+            try
+            {
+                FirebaseAuth.Instance.SignOut();
 
-			TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+				if (Settings.Current.AuthType == "facebook")
+				{
+					var loginManager = DeviceLoginManager.Instance;
+					loginManager.LogOut();
+                    Settings.Current.AuthType = string.Empty;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                // todo: handle errors
+            }
 
-			MessagingService.Current.Subscribe(MessageKeys.LogoutCallback, (IMessagingService arg1) =>
-			{
+            return Task.CompletedTask;
+        }
 
-				tcs.SetResult(true);
+        async Task<AccountResponse> LoginToFirebase(AuthCredential credential)
+        {
+            try
+            {
+                var signinResult = await FirebaseAuth.Instance.SignInWithCredentialAsync(credential);
+                var user = signinResult.User;
 
-			});
+                var split = user.DisplayName.Split(' ');
+                return new AccountResponse
+                {
+                    Success = true,
+                    User = new Clients.Portable.User()
+                    {
+                        Id = user.Uid,
+                        Email = user.Email,
+                        FirstName = split?.FirstOrDefault(),
+                        LastName = split?.LastOrDefault()
+                    }
+                };
+            }
+            catch (System.Exception ex)
+            {
+                return new AccountResponse
+                {
+                    Success = false,
+                    Error = ex.Message
 
-            var uri = Android.Net.Uri.Parse(logoutUri);
-			var intent = new Intent(Intent.ActionView, uri);
-			intent.AddFlags(ActivityFlags.NoHistory);
-			CrossCurrentActivity.Current.Activity.StartActivity(intent);
+                };
+            }
+        }
 
-			return tcs.Task;
-		}
-	}
+
+        class FacebookLoginCallback : Java.Lang.Object, IFacebookCallback
+        {
+            TaskCompletionSource<AccessToken> tokenTask;
+            public FacebookLoginCallback(TaskCompletionSource<AccessToken> tokenTask)
+            {
+                this.tokenTask = tokenTask;
+            }
+
+            void IFacebookCallback.OnCancel()
+            {
+                tokenTask.TrySetCanceled();
+            }
+
+            void IFacebookCallback.OnError(FacebookException error)
+            {
+                tokenTask.TrySetException(error);
+            }
+
+            void IFacebookCallback.OnSuccess(Java.Lang.Object result)
+            {
+                var loginResult = result as Xamarin.Facebook.Login.LoginResult;
+
+                var accessToken = loginResult.AccessToken;
+
+                tokenTask.TrySetResult(accessToken);
+                //throw new NotImplementedException();
+            }
+        }
+
+    }
 }

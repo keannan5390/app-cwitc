@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 using Google.AppIndexing;
 using HockeyApp.iOS;
 using Auth0.OidcClient;
+using Xamarin.Auth;
+using Firebase.RemoteConfig;
 
 namespace CWITC.iOS
 {
@@ -29,7 +31,6 @@ namespace CWITC.iOS
     [Register("AppDelegate")]
     public partial class AppDelegate : FormsApplicationDelegate
     {
-
         public static class ShortcutIdentifier
         {
             public const string Tweet = "org.cenwidev.cwitc.tweet";
@@ -37,28 +38,16 @@ namespace CWITC.iOS
             public const string Events = "org.cenwidev.cwitc.events";
         }
 
-
         public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)
         {
-            bool? isAuth0 = url.AbsoluteString?.Contains("auth0");
-            bool? isLogout = url.AbsoluteString?.Contains("logout");
-
-            if (isAuth0.HasValue && isAuth0.Value)
-            {
-                if (isLogout.HasValue && isLogout.Value)
-                    MessagingService.Current.SendMessage(MessageKeys.LogoutCallback);
-                else
-                    ActivityMediator.Instance.Send(url.AbsoluteString);
-
-                return true;
-            }
-
-            return false;
-		}
+			// We need to handle URLs by passing them to their own OpenUrl in order to make the SSO authentication works.
+            return Facebook.CoreKit.ApplicationDelegate.SharedInstance.OpenUrl(application, url, sourceApplication, annotation);
+        }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            
+            ConfigureFirebase();
+
             var tint = UIColor.FromRGB(255, 47, 75);
             UINavigationBar.Appearance.BarTintColor = UIColor.FromRGB(250, 250, 250); //bar background
             UINavigationBar.Appearance.TintColor = tint; //Tint color of button items
@@ -86,7 +75,6 @@ namespace CWITC.iOS
 
                 manager.StartManager();
                 //manager.Authenticator.AuthenticateInstallation();
-                   
             }
 
             Forms.Init();
@@ -121,19 +109,16 @@ namespace CWITC.iOS
             PullToRefreshLayoutRenderer.Init();
             LoadApplication(new App());
 
-
-           
-
             // Process any potential notification data from launch
             ProcessNotification(options);
 
             NSNotificationCenter.DefaultCenter.AddObserver(UIApplication.DidBecomeActiveNotification, DidBecomeActive);
 
-
-
-            return base.FinishedLaunching(app, options);
+			// This method verifies if you have been logged into the app before, and keep you logged in after you reopen or kill your app.
+			//bool valid = Facebook.CoreKit.ApplicationDelegate.SharedInstance.FinishedLaunching(app, options);
+			// 
+			return  base.FinishedLaunching(app, options);
         }
-
 
         void DidBecomeActive(NSNotification notification)
         {
@@ -350,7 +335,46 @@ namespace CWITC.iOS
             }
         }
 
-        #endregion
+		#endregion
+
+		void ConfigureFirebase()
+		{
+            Firebase.Analytics.App.Configure();
+
+            // we want to persist everything locally
+            Firebase.Database.Database.DefaultInstance.PersistenceEnabled = true;
+
+			// Enabling developer mode, allows for frequent refreshes of the cache
+			Firebase.RemoteConfig.RemoteConfig.SharedInstance.ConfigSettings = new RemoteConfigSettings(true);
+
+			// listen for any changes to the remote config. 
+            // in this case, we only care about the twitter API key auth info
+            RemoteConfig.SharedInstance.Fetch((status, error) =>
+    			{
+				switch (status)
+				{
+					case RemoteConfigFetchStatus.Success:
+						Console.WriteLine("Config Fetched!");
+
+						// Call this method to make fetched parameter values available to your app
+						RemoteConfig.SharedInstance.ActivateFetched();
+
+                        var keys = RemoteConfig.SharedInstance.GetKeys("");
+                        Settings.Current.TwitterApiKey = RemoteConfig.SharedInstance["twitter_api_key"].StringValue;
+                        Settings.Current.TwitterApiSecret = RemoteConfig.SharedInstance["twitter_api_secret"].StringValue;
+
+                            MessagingService.Current.SendMessage(MessageKeys.TwitterAuthRefreshed);
+
+						break;
+
+					case RemoteConfigFetchStatus.Throttled:
+					case RemoteConfigFetchStatus.NoFetchYet:
+					case RemoteConfigFetchStatus.Failure:
+						Console.WriteLine("Config not fetched...");
+						break;
+				}
+			});
+		}
     }
 }
 

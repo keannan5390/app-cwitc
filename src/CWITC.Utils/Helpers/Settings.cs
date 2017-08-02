@@ -35,6 +35,47 @@ namespace CWITC.Clients.Portable
             get { return settings ?? (settings = new Settings()); }
         }
 
+		const string AuthTypeKey = "auth_type_key";
+		readonly string AuthTypeDefault = string.Empty;
+		public string AuthType
+		{
+			get { return AppSettings.GetValueOrDefault<string>(AuthTypeKey, AuthTypeDefault); }
+			set
+			{
+				if (AppSettings.AddOrUpdateValue(AuthTypeKey, value))
+				{
+					OnPropertyChanged();
+				}
+			}
+		}
+
+        const string TwitterApiKeyKey = "twitter_api_key";
+        readonly string TwitterApiKeyDefault = string.Empty;
+		public string TwitterApiKey
+		{
+			get { return AppSettings.GetValueOrDefault<string>(TwitterApiKeyKey, TwitterApiKeyDefault); }
+			set
+			{
+				if (AppSettings.AddOrUpdateValue(TwitterApiKeyKey, value))
+				{
+					OnPropertyChanged();
+				}
+			}
+		}
+
+		const string TwitterApiSecretKey = "twitter_api_secret";
+		readonly string TwitterApiSecretDefault = string.Empty;
+		public string TwitterApiSecret
+		{
+			get { return AppSettings.GetValueOrDefault<string>(TwitterApiSecretKey, TwitterApiSecretDefault); }
+			set
+			{
+				if (AppSettings.AddOrUpdateValue(TwitterApiSecretKey, value))
+				{
+					OnPropertyChanged();
+				}
+			}
+		}
 
         const string GcmTokenKey = "gcm_token";
         readonly string GcmTokenDefault = string.Empty;
@@ -303,6 +344,21 @@ namespace CWITC.Clients.Portable
         {
             return DatabaseId++;
         }
+
+        const string UserIdKey = "userid_key";
+        readonly string UserIdDefault = string.Empty;
+		public string UserId
+		{
+            get { return AppSettings.GetValueOrDefault<string>(UserIdKey, UserIdDefault); }
+			set
+			{
+                if (AppSettings.AddOrUpdateValue(UserIdKey, value))
+				{
+					OnPropertyChanged();
+					OnPropertyChanged(nameof(UserId));
+				}
+			}
+		}
 
         const string FirstNameKey = "firstname_key";
         readonly string FirstNameDefault =  string.Empty;

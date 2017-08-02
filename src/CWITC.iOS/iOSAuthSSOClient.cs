@@ -1,76 +1,139 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Auth0.OidcClient;
 using CoreGraphics;
 using CWITC.Clients.Portable;
+using Firebase.Auth;
+//using Firebase.Auth;
 using FormsToolkit;
 using Foundation;
 using SafariServices;
 using UIKit;
+using Xamarin.Auth;
+using Xamarin.Forms;
 
 namespace CWITC.iOS
 {
-    public class iOSAuthSSOClient : ISSOClient
+    public partial class iOSAuthSSOClient : NSObject, ISFSafariViewControllerDelegate
     {
-        public async Task<AccountResponse> LoginAsync()
+        public async Task<AccountResponse> LoginAnonymously()
         {
-            var client = new Auth0Client(new Auth0ClientOptions
+            TaskCompletionSource<AccountResponse> task = new TaskCompletionSource<AccountResponse>();
+			Auth.DefaultInstance.SignInAnonymously((user, error) =>
+			{
+				if (error != null)
+				{
+					AuthErrorCode errorCode;
+					if (IntPtr.Size == 8) // 64 bits devices
+						errorCode = (AuthErrorCode)((long)error.Code);
+					else // 32 bits devices
+						errorCode = (AuthErrorCode)((int)error.Code);
+
+					// Posible error codes that SignInAnonymously method could throw
+					// Visit https://firebase.google.com/docs/auth/ios/errors for more information
+					switch (errorCode)
+					{
+						case AuthErrorCode.OperationNotAllowed:
+						default:
+							// Print error
+							break;
+					}
+
+					task.SetResult(new AccountResponse
+					{
+						Success = false,
+						Error = error.LocalizedDescription
+					});
+				}
+				else
+				{
+                    Settings.Current.AuthType = "anonymous";
+                    // Do your magic to handle authentication result
+                    task.SetResult(new AccountResponse
+                    {
+                        User = new Clients.Portable.User { IsAnonymous = true, Id = user.Uid },
+                        Success = true
+                    });
+				}
+			});
+
+            return await task.Task;
+        }
+
+        public async Task<AccountResponse> LoginWithFacebook()
+        {
+            TaskCompletionSource<string> tokenTask = new TaskCompletionSource<string>();
+            var topVC = GetViewController();
+
+            new Facebook.LoginKit.LoginManager().LogInWithReadPermissions(
+                new string[] { "public_profile email" },
+                topVC,
+                (Facebook.LoginKit.LoginManagerLoginResult result, NSError error) =>
+                {
+                    if (error != null)
+                    {
+
+                        //NSLog(@"Process error");
+                    }
+                    else if (result.IsCancelled)
+                    {
+                        tokenTask.SetCanceled();
+                        //NSLog(@"Cancelled");
+
+                    }
+                    else
+                    {
+                        var token = Facebook.CoreKit.AccessToken.CurrentAccessToken;
+                        tokenTask.SetResult(token.TokenString);
+                    }
+                });
+
+            string accessToken = await tokenTask.Task;
+
+            TaskCompletionSource<string> getEmailTask = new TaskCompletionSource<string>();
+            // gets the email & name for this user
+            var graphRequest = new Facebook.CoreKit.GraphRequest("me", NSDictionary.FromObjectAndKey(new NSString("id,email"), new NSString("fields")));
+            graphRequest.Start((connection, result, error) =>
+                {
+                    if (error != null)
+                    {
+                        //result.
+                    }
+                    var email = (NSString)result.ValueForKey(new NSString("email"));
+
+                    getEmailTask.SetResult(email);
+                });
+
+            string emailAddress = await getEmailTask.Task;
+
+            // Get access token for the signed-in user and exchange it for a Firebase credential
+            var credential = Firebase.Auth.FacebookAuthProvider.GetCredential(accessToken);
+            var firebaseResult = await LoginToFirebase(credential);
+            if (firebaseResult.Success)
             {
-                Domain = "cwitc.auth0.com",
-                ClientId = "r2xGTXLZeEgCmqYIgLOaRJwD1sDoySzh",
-                Controller = GetViewController()
-            });
-
-            var loginResult = await client.LoginAsync();
-
-            if (loginResult.IsError)
-            {
-                Debug.WriteLine($"An error occurred during login: {loginResult.Error}");
-
-                return new AccountResponse { Error = loginResult.Error, Success = false };
+                Settings.Current.AuthType = "facebook";
+                firebaseResult.User.Email = emailAddress;
             }
 
-            string token = loginResult.IdentityToken;
-            string accesstoken = loginResult.AccessToken;
-            string name = loginResult.User.FindFirst(c => c.Type == "name")?.Value;
-            string email = loginResult.User.FindFirst(c => c.Type == "email")?.Value;
-
-            string[] nameParts = name?.Split(' ');
-
-            return new AccountResponse
-            {
-                Success = true,
-                Token = token,
-                User = new User
-                {
-                    FirstName = nameParts[0],
-                    LastName = nameParts[1],
-                    Email = email
-                }
-            };
+            return firebaseResult;
         }
 
         public Task LogoutAsync()
         {
-            var redirect = "org.cenwidev.cwitc%3A%2F%2Fcwitc.auth0.com/ios/org.cenwidev.cwitc/logout";
-            string logoutUri = $"https://cwitc.auth0.com/v2/logout?returnTo={redirect}";
-            var controller = new SFSafariViewController(new NSUrl(logoutUri));
-
-            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-
-            var topVC = GetViewController();
-            MessagingService.Current.Subscribe(MessageKeys.LogoutCallback, (IMessagingService arg1) =>
+            NSError error;
+            if(!Firebase.Auth.Auth.DefaultInstance.SignOut(out error))
             {
-                topVC.DismissViewController(true, () => { });
+                if(Settings.Current.AuthType == "facebook")
+                {
+                    new Facebook.LoginKit.LoginManager().LogOut();
+                    Settings.Current.AuthType = string.Empty;
+                }
+            }
+            //Facebook.LoginKit.LoginManager.in
 
-                tcs.SetResult(true);
-
-            });
-
-            topVC.PresentViewController(controller, true, () => { });
-
-            return tcs.Task;
+            return Task.CompletedTask;
         }
 
         private UIViewController GetViewController()
@@ -78,6 +141,64 @@ namespace CWITC.iOS
             var vc = TrackCurrentViewControllerRenderer.CurrentViewController;
 
             return vc;
+        }
+
+        async Task<AccountResponse> LoginToFirebase(AuthCredential credential)
+        {
+            TaskCompletionSource<AccountResponse> tcs = new TaskCompletionSource<AccountResponse>();
+
+            // Authenticate with Firebase using the credential
+            Auth.DefaultInstance.SignIn(credential, (user, error) =>
+            {
+                if (error != null)
+                {
+                    AuthErrorCode errorCode;
+                    if (IntPtr.Size == 8) // 64 bits devices
+                        errorCode = (AuthErrorCode)((long)error.Code);
+                    else // 32 bits devices
+                        errorCode = (AuthErrorCode)((int)error.Code);
+
+                    // Posible error codes that SignIn method with credentials could throw
+                    // Visit https://firebase.google.com/docs/auth/ios/errors for more information
+                    switch (errorCode)
+                    {
+                        case AuthErrorCode.InvalidCredential:
+                        case AuthErrorCode.InvalidEmail:
+                        case AuthErrorCode.OperationNotAllowed:
+                        case AuthErrorCode.EmailAlreadyInUse:
+                        case AuthErrorCode.UserDisabled:
+                        case AuthErrorCode.WrongPassword:
+                        default:
+                            // Print error
+                            break;
+                    }
+
+                    tcs.SetResult(new AccountResponse
+                    {
+                        Success = false,
+                        Error = error.LocalizedDescription
+                    });
+                }
+                else
+                {
+                    // Do your magic to handle authentication result
+                    var split = user.DisplayName.Split(' ');
+
+                    tcs.SetResult(new AccountResponse
+                    {
+                        Success = true,
+                        User = new Clients.Portable.User()
+                        {
+                            Id = user.Uid,
+                            Email = user.Email,
+                            FirstName = split?.FirstOrDefault(),
+                            LastName = split?.LastOrDefault()
+                        }
+                    });
+                }
+            });
+
+            return await tcs.Task;
         }
     }
 }

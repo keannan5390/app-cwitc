@@ -142,10 +142,6 @@ namespace CWITC.Clients.Portable
                 Settings.LastName = string.Empty;
                 Settings.Email = string.Empty; //this triggers login text changed!
 
-                //drop favorites and feedback because we logged out.
-                await StoreManager.FavoriteStore.DropFavorites();
-                await StoreManager.FeedbackStore.DropFeedback();
-                await StoreManager.DropEverythingAsync();
                 await ExecuteSyncCommandAsync();
             }
             catch(Exception ex)
@@ -201,7 +197,7 @@ namespace CWITC.Clients.Portable
                 {
                     MessagingService.Current.SendMessage<MessagingServiceAlert>(MessageKeys.Message, new MessagingServiceAlert
                         {
-                            Title = "Evolve Data Synced",
+                            Title = "CWITC Data Synced",
                             Message = "You now have the latest conference data, however to sync your favorites and feedback you must sign in with your CWITC account.",
                             Cancel = "OK"
                         });

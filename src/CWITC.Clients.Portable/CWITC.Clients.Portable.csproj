@@ -53,7 +53,6 @@
     <Compile Include="ViewModel\EventDetailsViewModel.cs" />
     <Compile Include="Model\Extensions\EventExtensions.cs" />
     <Compile Include="ViewModel\FeedViewModel.cs" />
-    <Compile Include="Model\Tweet.cs" />
     <Compile Include="ViewModel\VenueViewModel.cs" />
     <Compile Include="Interfaces\IWiFIConfig.cs" />
     <Compile Include="ViewModel\ConferenceInfoViewModel.cs" />
@@ -66,6 +65,8 @@
     <Compile Include="Interfaces\ILaunchTwitter.cs" />
     <Compile Include="ViewModel\EvaluationsViewModel.cs" />
     <Compile Include="Language.cs" />
+    <Compile Include="Model\Tweet.cs" />
+    <Compile Include="Services\TweetsService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -219,10 +220,6 @@
     <ProjectReference Include="..\CWITC.Utils\CWITC.Utils.csproj">
       <Project>{dfa0f0f6-c396-412e-86a9-e9095f71cc36}</Project>
       <Name>CWITC.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CWITC.DataStore.Mock\CWITC.DataStore.Mock.csproj">
-      <Project>{4DF18ED7-0E19-4866-8D9B-B1CB5C86A366}</Project>
-      <Name>CWITC.DataStore.Mock</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
