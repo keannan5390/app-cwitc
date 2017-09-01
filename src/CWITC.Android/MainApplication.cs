@@ -6,15 +6,17 @@ using Android.Runtime;
 using Plugin.CurrentActivity;
 using CWITC.Clients.Portable;
 using Firebase;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Crashes;
 
 namespace CWITC.Droid
 {
-	//You can specify additional application information in this attribute
+    //You can specify additional application information in this attribute
     [Application]
     public class MainApplication : Application, Application.IActivityLifecycleCallbacks
     {
         public MainApplication(IntPtr handle, JniHandleOwnership transer)
-          :base(handle, transer)
+          : base(handle, transer)
         {
         }
 
@@ -22,6 +24,16 @@ namespace CWITC.Droid
         {
             base.OnCreate();
             RegisterActivityLifecycleCallbacks(this);
+
+#if !DEBUG
+            if (!string.IsNullOrWhiteSpace(ApiKeys.VSMobileCenterApiKeyAndroid) && ApiKeys.VSMobileCenterApiKeyIOS != nameof(ApiKeys.VSMobileCenterApiKeyAndroid))
+			{
+				MobileCenter
+					.Start(ApiKeys.VSMobileCenterApiKeyAndroid,
+					typeof(Microsoft.Azure.Mobile.Analytics.Analytics),
+					typeof(Crashes));
+			}
+#endif
         }
 
         public override void OnTerminate()
@@ -55,10 +67,10 @@ namespace CWITC.Droid
         public void OnActivityStarted(Activity activity)
         {
             CrossCurrentActivity.Current.Activity = activity;
-            HockeyApp.Android.Tracking.StartUsage(activity);
         }
 
-        public void OnActivityStopped(Activity activity) => HockeyApp.Android.Tracking.StopUsage(activity);
-
+        public void OnActivityStopped(Activity activity) 
+        {
+        } 
     }
 }

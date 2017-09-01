@@ -25,8 +25,9 @@ using CWITC.Clients.UI;
 using CWITC.DataObjects;
 using Xamarin;
 using Android.Gms.Auth.Api.SignIn;
-//using Gcm;
-//using Gcm.Client;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace CWITC.Droid
 {
@@ -112,9 +113,6 @@ namespace CWITC.Droid
 
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-
-            InitializeHockeyApp();
-
             LoadApplication(new App());
 
             OnNewIntent(Intent);
@@ -180,19 +178,6 @@ namespace CWITC.Droid
             {
                 CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
             }
-        }
-
-        void InitializeHockeyApp()
-        {
-            if (string.IsNullOrWhiteSpace(ApiKeys.HockeyAppAndroid) || ApiKeys.HockeyAppAndroid == nameof(ApiKeys.HockeyAppAndroid))
-                return;
-
-
-            HockeyApp.Android.CrashManager.Register(this, ApiKeys.HockeyAppAndroid);
-            //HockeyApp.Android.UpdateManager.Register(this, ApiKeys.HockeyAppAndroid);
-
-            HockeyApp.Android.Metrics.MetricsManager.Register(Application, ApiKeys.HockeyAppAndroid);
-
         }
 
         public bool IsPlayServicesAvailable()
