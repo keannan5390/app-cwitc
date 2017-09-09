@@ -3932,26 +3932,20 @@ namespace CWITC.Droid
 			// aapt resource value: 0x7f0d004d
 			public const int multiply = 2131558477;
 			
-			// aapt resource value: 0x7f0d00fc
-			public const int nav_conference_info = 2131558652;
-			
-			// aapt resource value: 0x7f0d00f8
-			public const int nav_evals = 2131558648;
-			
 			// aapt resource value: 0x7f0d00f5
 			public const int nav_events = 2131558645;
 			
 			// aapt resource value: 0x7f0d00f3
 			public const int nav_feed = 2131558643;
 			
-			// aapt resource value: 0x7f0d00fa
-			public const int nav_floor_map = 2131558650;
+			// aapt resource value: 0x7f0d00f9
+			public const int nav_floor_map = 2131558649;
 			
 			// aapt resource value: 0x7f0d00f6
 			public const int nav_gallery = 2131558646;
 			
-			// aapt resource value: 0x7f0d00fb
-			public const int nav_lunch_locations = 2131558651;
+			// aapt resource value: 0x7f0d00fa
+			public const int nav_lunch_locations = 2131558650;
 			
 			// aapt resource value: 0x7f0d00f2
 			public const int nav_section_main = 2131558642;
@@ -3959,14 +3953,14 @@ namespace CWITC.Droid
 			// aapt resource value: 0x7f0d00f4
 			public const int nav_sessions = 2131558644;
 			
-			// aapt resource value: 0x7f0d00fd
-			public const int nav_settings = 2131558653;
+			// aapt resource value: 0x7f0d00fb
+			public const int nav_settings = 2131558651;
 			
 			// aapt resource value: 0x7f0d00f7
 			public const int nav_sponsors = 2131558647;
 			
-			// aapt resource value: 0x7f0d00f9
-			public const int nav_venue = 2131558649;
+			// aapt resource value: 0x7f0d00f8
+			public const int nav_venue = 2131558648;
 			
 			// aapt resource value: 0x7f0d00d6
 			public const int nav_view = 2131558614;
@@ -4717,8 +4711,8 @@ namespace CWITC.Droid
 			// aapt resource value: 0x7f080067
 			public const int abc_toolbar_collapse_description = 2131230823;
 			
-			// aapt resource value: 0x7f080087
-			public const int app_name = 2131230855;
+			// aapt resource value: 0x7f080080
+			public const int app_name = 2131230848;
 			
 			// aapt resource value: 0x7f080076
 			public const int appbar_scrolling_view_behavior = 2131230838;
@@ -4915,32 +4909,17 @@ namespace CWITC.Droid
 			// aapt resource value: 0x7f080011
 			public const int common_signin_button_text_long = 2131230737;
 			
+			// aapt resource value: 0x7f080086
+			public const int default_web_client_id = 2131230854;
+			
 			// aapt resource value: 0x7f080082
-			public const int default_web_client_id = 2131230850;
-			
-			// aapt resource value: 0x7f080088
-			public const int facebook_app_id = 2131230856;
-			
-			// aapt resource value: 0x7f080089
-			public const int fb_login_protocol_scheme = 2131230857;
+			public const int facebook_app_id = 2131230850;
 			
 			// aapt resource value: 0x7f080083
-			public const int firebase_database_url = 2131230851;
-			
-			// aapt resource value: 0x7f080080
-			public const int gcm_defaultSenderId = 2131230848;
-			
-			// aapt resource value: 0x7f080084
-			public const int google_api_key = 2131230852;
+			public const int fb_login_protocol_scheme = 2131230851;
 			
 			// aapt resource value: 0x7f080081
 			public const int google_app_id = 2131230849;
-			
-			// aapt resource value: 0x7f080085
-			public const int google_crash_reporting_api_key = 2131230853;
-			
-			// aapt resource value: 0x7f080086
-			public const int google_storage_bucket = 2131230854;
 			
 			// aapt resource value: 0x7f080000
 			public const int library_name = 2131230720;
@@ -5029,11 +5008,11 @@ namespace CWITC.Droid
 			// aapt resource value: 0x7f080068
 			public const int search_menu_title = 2131230824;
 			
-			// aapt resource value: 0x7f08008a
-			public const int shortcut_events = 2131230858;
+			// aapt resource value: 0x7f080084
+			public const int shortcut_events = 2131230852;
 			
-			// aapt resource value: 0x7f08008b
-			public const int shortcut_sessions = 2131230859;
+			// aapt resource value: 0x7f080085
+			public const int shortcut_sessions = 2131230853;
 			
 			// aapt resource value: 0x7f080069
 			public const int status_bar_notification_info_overflow = 2131230825;
