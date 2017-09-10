@@ -94,12 +94,6 @@
     <Compile Include="Pages\Info\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Info\WiFiInformationPage.xaml.cs">
-      <DependentUpon>WiFiInformationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\Info\CodeOfConductPage.xaml.cs">
-      <DependentUpon>CodeOfConductPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Info\VenuePage.xaml.cs">
       <DependentUpon>VenuePage.xaml</DependentUpon>
     </Compile>
@@ -141,9 +135,6 @@
     <Compile Include="Pages\Home\NotificationsPage.xaml.cs">
       <DependentUpon>NotificationsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Info\ConferenceInformationPage.xaml.cs">
-      <DependentUpon>ConferenceInformationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Cells\SponsorCell.xaml.cs">
       <DependentUpon>SponsorCell.xaml</DependentUpon>
     </Compile>
@@ -157,11 +148,17 @@
     <Compile Include="Controls\AlwaysScrollView.cs" />
     <Compile Include="Controls\FavoriteImage.cs" />
     <Compile Include="Controls\PinchToZoomContainer.cs" />
-    <Compile Include="Pages\Sessions\EvaluationsPage.xaml.cs">
-      <DependentUpon>EvaluationsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Info\FloorMap.xaml.cs">
       <DependentUpon>FloorMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Gallery\GalleryPage.xaml.cs">
+      <DependentUpon>GalleryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Lunch\LunchLocationsPage.xaml.cs">
+      <DependentUpon>LunchLocationsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Lunch\LunchLocationDetailsPage.xaml.cs">
+      <DependentUpon>LunchLocationDetailsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
@@ -209,14 +206,6 @@
     </Reference>
     <Reference Include="Plugin.Settings.Abstractions, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Xam.Plugins.Settings.2.5.1.0\lib\portable-net45+wp80+win8+wpa81\Plugin.Settings.Abstractions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.Share, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Plugin.Share.4.0.3\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Plugin.Share.Abstractions, Version=4.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Plugin.Share.4.0.3\lib\portable-net45+wp8+wpa81+win8+MonoAndroid10+MonoTouch10+Xamarin.iOS10+UAP10\Plugin.Share.Abstractions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml" />
@@ -271,6 +260,12 @@
     </Reference>
     <Reference Include="Syncfusion.SfRating.XForms">
       <HintPath>..\packages\Syncfusion.Xamarin.SfRating.15.2.0.46\lib\portable-win+net45+wp80+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Syncfusion.SfRating.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share.Abstractions">
+      <HintPath>..\packages\Plugin.Share.7.0.1\lib\netstandard1.0\Plugin.Share.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Share">
+      <HintPath>..\packages\Plugin.Share.7.0.1\lib\netstandard1.0\Plugin.Share.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -350,14 +345,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>SettingsPage.xaml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Info\WiFiInformationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>WiFiInformationPage.xaml</LogicalName>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Info\CodeOfConductPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>CodeOfConductPage.xaml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Info\VenuePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>VenuePage.xaml</LogicalName>
@@ -406,10 +393,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>NotificationsPage.xaml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Info\ConferenceInformationPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>ConferenceInformationPage.xaml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Cells\SponsorCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>SponsorCell.xaml</LogicalName>
@@ -422,13 +405,21 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>FeedbackPage.xaml</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Sessions\EvaluationsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <LogicalName>EvaluationsPage.xaml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\Info\FloorMap.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>FloorMapPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Gallery\GalleryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>GalleryPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Lunch\LunchLocationsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LunchLocationsPage.xaml</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pages\Lunch\LunchLocationDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <LogicalName>LunchLocationDetailsPage.xaml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -451,6 +442,10 @@
       <SubType>Designer</SubType>
       <LogicalName>FloorMapsPage.xaml</LogicalName>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Gallery\" />
+    <Folder Include="Pages\Lunch\" />
   </ItemGroup>
   <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>

@@ -15,11 +15,12 @@ using Refractored.XamForms.PullToRefresh.iOS;
 using Social;
 using CoreSpotlight;
 using CWITC.DataStore.Abstractions;
-using HockeyApp;
 using System.Threading.Tasks;
-using HockeyApp.iOS;
 using Xamarin.Auth;
 using Firebase.RemoteConfig;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 namespace CWITC.iOS
 {
@@ -43,11 +44,11 @@ namespace CWITC.iOS
             return isGoogle || isFacebook;
         }
 
-		public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
-		{
+        public override bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
             var openUrlOptions = new UIApplicationOpenUrlOptions(options);
             return OpenUrl(app, url, openUrlOptions.SourceApplication, options);
-		}
+        }
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
@@ -69,18 +70,16 @@ namespace CWITC.iOS
             UIView.AppearanceWhenContainedIn(typeof(UIActivityViewController)).TintColor = tint;
             UIView.AppearanceWhenContainedIn(typeof(SLComposeViewController)).TintColor = tint;
 
-            if (!string.IsNullOrWhiteSpace(ApiKeys.HockeyAppiOS) && ApiKeys.HockeyAppiOS != nameof(ApiKeys.HockeyAppiOS)) 
+#if !DEBUG
+            if (!string.IsNullOrWhiteSpace(ApiKeys.VSMobileCenterApiKeyIOS) && ApiKeys.VSMobileCenterApiKeyIOS != nameof(ApiKeys.VSMobileCenterApiKeyIOS)) 
             {
-               
-                var manager = BITHockeyManager.SharedHockeyManager;
-                manager.Configure(ApiKeys.HockeyAppiOS);
-
-                //Disable update manager
-                manager.DisableUpdateManager = true;
-
-                manager.StartManager();
-                //manager.Authenticator.AuthenticateInstallation();
+				MobileCenter
+                    .Start(
+                        ApiKeys.VSMobileCenterApiKeyIOS,
+				        typeof(Analytics), 
+                        typeof(Crashes));
             }
+#endif
 
             Forms.Init();
             FormsMaps.Init();
@@ -132,7 +131,7 @@ namespace CWITC.iOS
             ((CWITC.Clients.UI.App)Xamarin.Forms.Application.Current).SecondOnResume();
         }
 
-        #region Quick Action
+#region Quick Action
 
         public UIApplicationShortcutItem LaunchedShortcutItem { get; set; }
 
@@ -142,8 +141,6 @@ namespace CWITC.iOS
 
             // Handle any shortcut item being selected
             HandleShortcutItem(LaunchedShortcutItem);
-
-
 
             // Clear shortcut after it's been handled
             LaunchedShortcutItem = null;
@@ -223,9 +220,9 @@ namespace CWITC.iOS
                 });
         }
 
-        #endregion
+#endregion
 
-        #region Background Refresh
+#region Background Refresh
 
         private void SetMinimumBackgroundFetchInterval()
         {
@@ -270,7 +267,7 @@ namespace CWITC.iOS
             }
         }
 
-		#endregion
+#endregion
 
 		void ConfigureFirebase()
 		{
@@ -297,8 +294,10 @@ namespace CWITC.iOS
                         var keys = RemoteConfig.SharedInstance.GetKeys("");
                         Settings.Current.TwitterApiKey = RemoteConfig.SharedInstance["twitter_api_key"].StringValue;
                         Settings.Current.TwitterApiSecret = RemoteConfig.SharedInstance["twitter_api_secret"].StringValue;
+                        var grouveCode = RemoteConfig.SharedInstance["grouve_event_code"].StringValue;
+                        Settings.Current.GrouveEventCode = grouveCode;
 
-                            MessagingService.Current.SendMessage(MessageKeys.TwitterAuthRefreshed);
+                        MessagingService.Current.SendMessage(MessageKeys.TwitterAuthRefreshed);
 
 						break;
 

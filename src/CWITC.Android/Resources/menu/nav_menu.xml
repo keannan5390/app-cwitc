@@ -15,6 +15,10 @@
             android:id="@+id/nav_events"
             android:icon="@drawable/menu_events"
             android:title="Schedule" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/menu_gallery"
+            android:title="Gallery"/>
     </group>
 
      <item android:title="Information" >
@@ -26,11 +30,6 @@
                 android:title="Sponsors"
                 android:checkable="true" />
             <item
-                android:id="@+id/nav_evals"
-                android:icon="@drawable/menu_evals"
-                android:title="Evaluations"
-                android:checkable="true" />
-            <item
                 android:id="@+id/nav_venue"
                 android:icon="@drawable/menu_venue"
                 android:title="Venue"
@@ -38,12 +37,12 @@
             <item
                 android:id="@+id/nav_floor_map"
                 android:icon="@drawable/menu_plan"
-                android:title="Floor Maps"
+                android:title="Event Map"
                 android:checkable="true" />
             <item
-                android:id="@+id/nav_conference_info"
-                android:icon="@drawable/menu_info"
-                android:title="Conference Info"
+                android:id="@+id/nav_lunch_locations"
+                android:icon="@drawable/ic_restaurant_menu"
+                android:title="Lunch Locations"
                 android:checkable="true" />
             <item
                 android:title="Settings"

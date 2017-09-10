@@ -48,23 +48,23 @@ namespace CWITC.Clients.UI
                     case (int)AppPage.Events://events
                         pages.Add(menuId, new EvolveNavigationPage(new EventsPage()));
                         break;
+                    case (int)AppPage.Gallery://gallery
+                        pages.Add(menuId, new EvolveNavigationPage(new GalleryPage()));
+						break;
                     case (int)AppPage.Sponsors://sponsors
                         newPage = new EvolveNavigationPage(new SponsorsPage());
                         break;
                     case (int)AppPage.Venue: //venue
                         newPage = new EvolveNavigationPage(new VenuePage());
                         break;
-                    case (int)AppPage.ConferenceInfo://Conference info
-                        newPage = new EvolveNavigationPage(new ConferenceInformationPage());
-                        break;
                     case (int)AppPage.FloorMap://Floor Maps
                         newPage = new EvolveNavigationPage(new FloorMapsPage());
                         break;
+                    case (int)AppPage.LunchLocations://Lunch!
+                        newPage = new EvolveNavigationPage(new LunchLocationsPage());
+						break;
                     case (int)AppPage.Settings://Settings
                         newPage = new EvolveNavigationPage(new SettingsPage());
-                        break;
-                    case (int)AppPage.Evals:
-                        newPage = new EvolveNavigationPage (new EvaluationsPage ());
                         break;
                 }
             }

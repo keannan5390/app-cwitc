@@ -25,8 +25,11 @@ using CWITC.Clients.UI;
 using CWITC.DataObjects;
 using Xamarin;
 using Android.Gms.Auth.Api.SignIn;
-//using Gcm;
-//using Gcm.Client;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Crashes;
+using Microsoft.Azure.Mobile.Analytics;
+using Firebase.RemoteConfig;
+using Android.Gms.Tasks;
 
 namespace CWITC.Droid
 {
@@ -83,7 +86,7 @@ namespace CWITC.Droid
         DataScheme = "@PACKAGE_NAME@",
         DataHost = "cwitc.auth0.com",
         DataPathPrefix = "/android/@PACKAGE_NAME@/logout")]
-    public class MainActivity : FormsAppCompatActivity
+    public class MainActivity : FormsAppCompatActivity, Android.Gms.Tasks.IOnCompleteListener
     {
         const int RC_SIGN_IN = 9001;
         TaskCompletionSource<GoogleSignInAccount> googleSignInTask = null;
@@ -112,9 +115,6 @@ namespace CWITC.Droid
 
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-
-            InitializeHockeyApp();
-
             LoadApplication(new App());
 
             OnNewIntent(Intent);
@@ -140,6 +140,8 @@ namespace CWITC.Droid
             }
 
             DataRefreshService.ScheduleRefresh(this);
+
+            InitializeFirebase();
         }
 
         protected override void OnNewIntent(Intent intent)
@@ -174,25 +176,12 @@ namespace CWITC.Droid
                 else
                 {
                     googleSignInTask.SetCanceled();
-                }   
+                }
             }
             else
             {
                 CallbackManager.OnActivityResult(requestCode, (int)resultCode, data);
             }
-        }
-
-        void InitializeHockeyApp()
-        {
-            if (string.IsNullOrWhiteSpace(ApiKeys.HockeyAppAndroid) || ApiKeys.HockeyAppAndroid == nameof(ApiKeys.HockeyAppAndroid))
-                return;
-
-
-            HockeyApp.Android.CrashManager.Register(this, ApiKeys.HockeyAppAndroid);
-            //HockeyApp.Android.UpdateManager.Register(this, ApiKeys.HockeyAppAndroid);
-
-            HockeyApp.Android.Metrics.MetricsManager.Register(Application, ApiKeys.HockeyAppAndroid);
-
         }
 
         public bool IsPlayServicesAvailable()
@@ -227,8 +216,39 @@ namespace CWITC.Droid
             this.googleSignInTask = tcs;
 
             Intent signInIntent = Android.Gms.Auth.Api.Auth.GoogleSignInApi.GetSignInIntent(apiClient);
-			StartActivityForResult(signInIntent, RC_SIGN_IN);
+            StartActivityForResult(signInIntent, RC_SIGN_IN);
         }
-    }
+
+        public void OnComplete(Android.Gms.Tasks.Task task)
+        {
+            if (task.IsSuccessful)
+            {
+                bool isFetched = FirebaseRemoteConfig.Instance.ActivateFetched();
+            }
+            else
+            {
+                
+            }
+
+			Settings.Current.TwitterApiKey = FirebaseRemoteConfig.Instance.GetString("twitter_api_key");
+			Settings.Current.TwitterApiSecret = FirebaseRemoteConfig.Instance.GetString("twitter_api_secret");
+            Settings.Current.GrouveEventCode = FirebaseRemoteConfig.Instance.GetString("grouve_event_code");
+
+            MessagingService.Current.SendMessage(MessageKeys.TwitterAuthRefreshed);
+        }
+
+       async void InitializeFirebase()
+		{
+			FirebaseRemoteConfig.Instance.SetDefaults(new Dictionary<string, Java.Lang.Object>
+			{
+				{ "grouve_event_code", ApiKeys.GrouveEventCode }
+			});
+
+			FirebaseRemoteConfig.Instance
+								.Fetch()
+								.AddOnCompleteListener(this, this);
+		}
+
+	}
 }
 
