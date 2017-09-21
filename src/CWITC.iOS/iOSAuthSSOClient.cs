@@ -219,8 +219,7 @@ namespace CWITC.iOS
         {
             TaskCompletionSource<AccountResponse> tcs = new TaskCompletionSource<AccountResponse>();
 
-            // Authenticate with Firebase using the credential
-            Auth.DefaultInstance.SignIn(credential, (user, error) =>
+            AuthResultHandler handler = (user, error) =>
             {
                 if (error != null)
                 {
@@ -268,7 +267,19 @@ namespace CWITC.iOS
                         }
                     });
                 }
-            });
+            };
+
+            var currentUser = Auth.DefaultInstance.CurrentUser;
+
+            if (currentUser != null && Settings.Current.AuthType == "anonymous")
+            {
+                currentUser.Link(credential, handler);
+            }
+            else
+            {
+                // Authenticate with Firebase using the credential
+                Auth.DefaultInstance.SignIn(credential, handler);
+            }
 
             return await tcs.Task;
         }

@@ -82,14 +82,14 @@ namespace CWITC.Droid
 
                 return firebaseResult;
             }
-			catch (System.Exception ex)
-			{
-				return new AccountResponse
-				{
-					Success = false,
-					Error = ex.Message
-				};
-			}
+            catch (System.Exception ex)
+            {
+                return new AccountResponse
+                {
+                    Success = false,
+                    Error = ex.Message
+                };
+            }
         }
 
         private void GetGoogleApiClient()
@@ -182,21 +182,21 @@ namespace CWITC.Droid
                     loginManager.LogOut();
                 }
 
-				if (Settings.Current.AuthType == "google")
-				{
+                if (Settings.Current.AuthType == "google")
+                {
                     GetGoogleApiClient();
 
                     TaskCompletionSource<Statuses> signoutTaks = new TaskCompletionSource<Statuses>();
-                        
+
                     Auth.GoogleSignInApi.SignOut(_apiClient)
-                        .SetResultCallback<IResult>(result => 
+                        .SetResultCallback<IResult>(result =>
                         {
                             signoutTaks.SetResult(result.Status);
                         });
 
                     var logoutStatus = await signoutTaks.Task;
                     _apiClient = null;
-				}
+                }
 
                 Settings.Current.AuthType = string.Empty;
             }
@@ -210,7 +210,18 @@ namespace CWITC.Droid
         {
             try
             {
-                var signinResult = await FirebaseAuth.Instance.SignInWithCredentialAsync(credential);
+                IAuthResult signinResult;
+
+                var currentUser = FirebaseAuth.Instance.CurrentUser;
+                if (currentUser != null && Settings.Current.AuthType == "anonymous")
+                {
+                    signinResult = await currentUser.LinkWithCredentialAsync(credential);
+                }
+                else
+                {
+                    signinResult = await FirebaseAuth.Instance.SignInWithCredentialAsync(credential);
+                }
+
                 var user = signinResult.User;
 
                 var split = user.DisplayName.Split(' ');
