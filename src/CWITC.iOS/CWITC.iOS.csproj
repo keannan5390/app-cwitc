@@ -32,6 +32,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchExtraArgs></MtouchExtraArgs>
+	<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>
@@ -61,6 +62,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchSdkVersion></MtouchSdkVersion>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+	<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -400,6 +402,9 @@
     <Reference Include="LinqToTwitter.xamarin">
       <HintPath>..\packages\linqtotwitter.4.2.0-beta2\lib\xamarin.ios\LinqToTwitter.xamarin.dll</HintPath>
     </Reference>
+    <Reference Include="Cirrious.FluentLayouts.Touch">
+      <HintPath>..\packages\Cirrious.FluentLayout.2.6.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\heart_empty.png" />
@@ -478,6 +483,12 @@
     <BundleResource Include="Resources\quickaction_lunch.png" />
     <BundleResource Include="Resources\quickaction_lunch%402x.png" />
     <BundleResource Include="Resources\quickaction_lunch%403x.png" />
+    <BundleResource Include="Resources\ic_map.png" />
+    <BundleResource Include="Resources\ic_map%402x.png" />
+    <BundleResource Include="Resources\ic_map%403x.png" />
+    <BundleResource Include="Resources\ic_view_list.png" />
+    <BundleResource Include="Resources\ic_view_list%402x.png" />
+    <BundleResource Include="Resources\ic_view_list%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -485,6 +496,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Condition=" '$(Configuration)' == 'Debug' " Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\Settings.cs" />
@@ -499,6 +511,7 @@
     <Compile Include="Renderers\TrackCurrentViewControllerRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Datastore.Firebase\BaseStore.cs" />
+    <Compile Include="Renderers\PlaceholderEditorRenderer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
